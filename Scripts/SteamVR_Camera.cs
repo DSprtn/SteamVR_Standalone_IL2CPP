@@ -421,6 +421,12 @@ public class SteamVR_Camera : MonoBehaviour
             RenderTexture.active = null; 
         }
 
+        void OnDestroy()
+        {
+            /// Reset Forcelast() so we get CameraFlip in there ---
+            isLast = false;
+        }
+
     public static bool useHeadTracking = true;
     #endregion
 

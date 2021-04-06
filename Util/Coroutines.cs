@@ -9,6 +9,10 @@ using UnityEngine;
 
 namespace SteamVR_Standalone_IL2CPP.Util
 {
+
+    /// <summary>
+    /// Code from Melonloader by @HerpDerpinstine https://github.com/LavaGang/MelonLoader/blob/master/MelonLoader.Support.Il2Cpp/MelonCoroutines.cs
+    /// </summary>
     public static class MelonCoroutines
     {
         private struct CoroTuple

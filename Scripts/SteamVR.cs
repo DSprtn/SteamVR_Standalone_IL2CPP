@@ -821,6 +821,12 @@ namespace Valve.VR
             public const int k_nRenderEventID_PostPresentHandoff = 201510024;
         }
 
+
+        /// <summary>
+        /// Most of this code by @Knah https://github.com/knah/VRCMods/blob/master/TrueShaderAntiCrash/TrueShaderAntiCrashMod.cs
+        /// Thank him for supporting il2cpp modding ^^
+        /// </summary>
+
         public static class BlackMagic
         {
 
@@ -857,7 +863,6 @@ namespace Valve.VR
 
             public static void InitMoreBlackMagic(IntPtr hModule)
             {
-                
                 ourGetRenderEventFunc = Marshal.GetDelegateForFunctionPointer<CallbackPointer>(GetProcAddress(hModule, "UnityHooks_GetRenderEventFunc"));
             }
 

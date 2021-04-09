@@ -50,6 +50,17 @@ public class SteamVR_Camera : MonoBehaviour
     // down using the following scale value to balance performance.
     static public float sceneResolutionScale = 1.0f;
     static private RenderTexture _sceneTexture;
+
+    public static Resolution GetSceneResolution()
+        {
+            var vr = SteamVR.instance;
+            Resolution r = new Resolution();
+            int w = (int)(vr.sceneWidth * sceneResolutionScale);
+            int h = (int)(vr.sceneHeight * sceneResolutionScale);
+            r.width = w;
+            r.height = h;
+            return r;
+        }
     static public RenderTexture GetSceneTexture(bool hdr)
     {
         var vr = SteamVR.instance;
@@ -423,7 +434,7 @@ public class SteamVR_Camera : MonoBehaviour
 
         void OnDestroy()
         {
-            /// Reset Forcelast() so we get CameraFlip in there ---
+            /// Reset Forcelast() so we get CameraFlip initialization working ---
             isLast = false;
         }
 

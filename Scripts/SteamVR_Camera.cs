@@ -85,7 +85,7 @@ public class SteamVR_Camera : MonoBehaviour
         if (_sceneTexture == null)
         {
             _sceneTexture = new RenderTexture(w, h, 0, format);
-            _sceneTexture.depth = 16;
+            _sceneTexture.depth = 32;
             _sceneTexture.antiAliasing = aa;
 
             // OpenVR assumes floating point render targets are linear unless otherwise specified.

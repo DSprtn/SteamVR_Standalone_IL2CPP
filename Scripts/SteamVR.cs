@@ -599,9 +599,15 @@ namespace Valve.VR
             }
         }
 
-
+        static bool m_setup;
         private SteamVR()
         {
+            // Sometimes during game exit SteamVR will attempt to re-create itself, for some reason.
+            if(m_setup)
+            {
+                return;
+            }
+            m_setup = true;
             BlackMagic.LoadBlackMagic();
             ClassInjector.RegisterTypeInIl2Cpp<MelonCoroutineCallbacks>();
             ClassInjector.RegisterTypeInIl2Cpp<SteamVR_ActivateActionSetOnLoad>();

@@ -197,15 +197,11 @@ namespace Valve.VR
             }
         }
 
-
-
-
         void RenderEye(SteamVR vr, EVREye eye)
         {
-            eyePreRenderCallback?.Invoke(eye);
-            
             int i = (int)eye;
             SteamVR_Render.eye = eye;
+            
 
             if (cameraMask != null)
                 cameraMask.Set(vr, eye);
@@ -218,9 +214,9 @@ namespace Valve.VR
 
                 // Update position to keep from getting culled
                 cameraMask.transform.position = c.transform.position;
-
+                
                 var camera = c.camera;
-                camera.targetTexture = SteamVR_Camera.GetSceneTexture(camera.allowHDR);
+                
                 int cullingMask = camera.cullingMask;
                 if (eye == EVREye.Eye_Left)
                 {
@@ -232,6 +228,8 @@ namespace Valve.VR
                     camera.cullingMask &= ~leftMask;
                     camera.cullingMask |= rightMask;
                 }
+                eyePreRenderCallback?.Invoke(eye);
+                camera.targetTexture = SteamVR_Camera.GetSceneTexture(camera.allowHDR);
                 camera.Render();
                 
                 if (SteamVR_Camera.doomp)

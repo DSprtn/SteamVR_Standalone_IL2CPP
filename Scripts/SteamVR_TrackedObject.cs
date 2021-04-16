@@ -76,24 +76,19 @@ namespace Valve.VR
             }
         }
 
-        SteamVR_Events.Action newPosesAction;
-
         private void Awake()
         {
-            newPosesAction = SteamVR_Events.NewPosesAction(OnNewPoses);
-            OnEnable();
-        }
-
-        void OnEnable()
-        {
-
-            newPosesAction.enabled = true;
+            SteamVR_Events.NewPoses.Listen(OnNewPoses);
         }
 
         void OnDisable()
         {
-            newPosesAction.enabled = false;
             isValid = false;
+        }
+
+        void OnDestroy()
+        {
+            SteamVR_Events.NewPoses.Remove(OnNewPoses);
         }
 
         public void SetDeviceIndex(int index)

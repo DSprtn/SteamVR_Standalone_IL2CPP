@@ -61,6 +61,16 @@ public class SteamVR_Camera : MonoBehaviour
             r.height = h;
             return r;
         }
+
+    public static Resolution GetUnscaledSceneResolution()
+        {
+            var vr = SteamVR.instance;
+            Resolution r = new Resolution();
+            r.width = (int)vr.sceneWidth;
+            r.height = (int)vr.sceneHeight;
+            return r;
+        }
+
     static public RenderTexture GetSceneTexture(bool hdr)
     {
         var vr = SteamVR.instance;

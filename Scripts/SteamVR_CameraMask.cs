@@ -11,6 +11,18 @@ namespace Valve.VR
     {
         public SteamVR_CameraMask(IntPtr value)
 : base(value) { }
+
+        public MeshRenderer meshRenderer;
+
+        public static Material occlusionMaterial;
+
+
+        private static Mesh[] hiddenAreaMeshes = new Mesh[2];
+
+
+        public MeshFilter meshFilter;
+
+
         private void Awake()
         {
             this.meshFilter = GetComponent<MeshFilter>();
@@ -18,16 +30,16 @@ namespace Valve.VR
             {
                 this.meshFilter = base.gameObject.AddComponent<MeshFilter>();
             }
-            if (SteamVR_CameraMask.material == null)
+            if (SteamVR_CameraMask.occlusionMaterial == null)
             {
-                SteamVR_CameraMask.material = new Material(VRShaders.GetShader(VRShaders.VRShader.occlusion));
+                SteamVR_CameraMask.occlusionMaterial = new Material(VRShaders.GetShader(VRShaders.VRShader.occlusion));
             }
-            MeshRenderer meshRenderer = base.GetComponent<MeshRenderer>();
+            meshRenderer = base.GetComponent<MeshRenderer>();
             if (meshRenderer == null)
             {
                 meshRenderer = base.gameObject.AddComponent<MeshRenderer>();
             }
-            meshRenderer.material = SteamVR_CameraMask.material;
+            meshRenderer.material = SteamVR_CameraMask.occlusionMaterial;
             meshRenderer.shadowCastingMode = ShadowCastingMode.Off;
             meshRenderer.receiveShadows = false;
             meshRenderer.lightProbeUsage = LightProbeUsage.Off;
@@ -116,19 +128,13 @@ namespace Valve.VR
             array3[num9++] = num7 + 11;
             array3[num9++] = num7 + 6;
             Mesh m = new Mesh();
-            m.SetVertices(array2);
-            m.SetTriangles(array3,0);
+            m.vertices = array2;
+            m.triangles = array3;
             m.bounds = new Bounds(Vector3.zero, new Vector3(float.MaxValue, float.MaxValue, float.MaxValue));
             return m;
         }
 
 
-        private static Material material;
 
-
-        private static Mesh[] hiddenAreaMeshes = new Mesh[2];
-
-
-        private MeshFilter meshFilter;
     }
 }

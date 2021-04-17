@@ -62,6 +62,16 @@ public class SteamVR_Camera : MonoBehaviour
             return r;
         }
 
+    public static Resolution GetResolutionForAspect(int aspectW, int aspectH)
+        {
+            Resolution hmdResolution = GetSceneResolution();
+
+            // We calcuate an optimal 16:9 resolution to use with the HMD resolution because that's the best aspect for the UI rendering
+            Resolution closestToAspect = hmdResolution;
+            closestToAspect.height = closestToAspect.width / aspectW * aspectH;
+            return closestToAspect;
+        }
+
     public static Resolution GetUnscaledSceneResolution()
         {
             var vr = SteamVR.instance;

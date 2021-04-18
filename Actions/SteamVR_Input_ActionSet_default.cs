@@ -28,19 +28,11 @@ namespace Valve.VR
             }
         }
 
-        public virtual SteamVR_Action_Single Squeeze
+        public virtual SteamVR_Action_Boolean PushToTalk
         {
             get
             {
-                return SteamVR_Actions.default_Squeeze;
-            }
-        }
-
-        public virtual SteamVR_Action_Boolean HeadsetOnHead
-        {
-            get
-            {
-                return SteamVR_Actions.default_HeadsetOnHead;
+                return SteamVR_Actions.default_PushToTalk;
             }
         }
 

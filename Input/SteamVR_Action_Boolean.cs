@@ -342,7 +342,12 @@ namespace Valve.VR
 
             EVRInputError err = OpenVR.Input.GetDigitalActionData(action.handle, ref actionData, actionData_size, inputSourceHandle);
             if (err != EVRInputError.None)
-                Debug.LogError("<b>[SteamVR_Standalone]</b> GetDigitalActionData error (" + action.fullPath + "): " + err.ToString() + " handle: " + action.handle.ToString());
+                Debug.LogWarning("<b>[SteamVR_Standalone]</b> GetDigitalActionData error (" + action.fullPath + "): " + err.ToString() + " handle: " + action.handle.ToString());
+
+            if(action.handle == 0)
+            {
+                Debug.LogError($"Action {action.GetShortName()} seems to have an incorrect handle!");
+            }
 
             if (changed)
                 changedTime = Time.realtimeSinceStartup + actionData.fUpdateTime;

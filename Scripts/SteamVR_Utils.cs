@@ -387,7 +387,7 @@ public static class SteamVR_Utils
 
     public static void QueueEventOnRenderThread(int eventID)
     {
-        GL.IssuePluginEvent(SteamVR.BlackMagic.GetRenderEventFunc(), eventID);
+        GL.IssuePluginEvent(SteamVR.ExternalPluginFunctionExtractor.GetRenderEventFunc(), eventID);
     }
 
 

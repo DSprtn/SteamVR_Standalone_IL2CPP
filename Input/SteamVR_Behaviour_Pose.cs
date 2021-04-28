@@ -74,6 +74,8 @@ namespace Valve.VR
         protected SteamVR_HistoryBuffer historyBuffer = new SteamVR_HistoryBuffer(30);
 
 
+        public Quaternion rotationOffset = Quaternion.identity;
+
         protected virtual void Start()
         {
             if (poseAction == null)
@@ -132,12 +134,12 @@ namespace Valve.VR
             if (origin != null)
             {
                 transform.position = origin.transform.TransformPoint(poseAction[inputSource].localPosition);
-                transform.rotation = origin.rotation * poseAction[inputSource].localRotation;
+                transform.rotation = origin.rotation * rotationOffset * poseAction[inputSource].localRotation;
             }
             else
             {
                 transform.localPosition = poseAction[inputSource].localPosition;
-                transform.localRotation = poseAction[inputSource].localRotation;
+                transform.localRotation = poseAction[inputSource].localRotation * rotationOffset;
             }
         }
 

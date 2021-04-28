@@ -599,16 +599,19 @@ namespace Valve.VR
             }
         }
 
-        static bool m_setup;
-        private SteamVR()
+
+        static bool classesRegistered = false;
+
+        /// <summary>
+        /// Inject types into il2cpp pre-emptively to prevent errors using this method
+        /// </summary>
+        public static void PreRegisterIL2CPPClasses()
         {
-            // Sometimes during game exit SteamVR will attempt to re-create itself, for some reason.
-            if(m_setup)
+            if(classesRegistered)
             {
                 return;
             }
-            m_setup = true;
-            BlackMagic.LoadBlackMagic();
+            classesRegistered = true;
             ClassInjector.RegisterTypeInIl2Cpp<MelonCoroutineCallbacks>();
             ClassInjector.RegisterTypeInIl2Cpp<SteamVR_ActivateActionSetOnLoad>();
             ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Behaviour>();
@@ -636,6 +639,20 @@ namespace Valve.VR
             ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Skybox>();
             ClassInjector.RegisterTypeInIl2Cpp<SteamVR_TrackingReferenceManager>();
             ClassInjector.RegisterTypeInIl2Cpp<SteamVR_TrackedObject>();
+        }
+
+        static bool m_setup;
+        private SteamVR()
+        {
+            // Sometimes during game exit SteamVR will attempt to re-create itself, for some reason.
+            if(m_setup)
+            {
+                return;
+            }
+            m_setup = true;
+            ExternalPluginFunctionExtractor.GetLoadPluginFunction();
+            PreRegisterIL2CPPClasses();
+            
             UnityHooks.Init();
 
 
@@ -833,19 +850,31 @@ namespace Valve.VR
         /// Thank him for supporting il2cpp modding ^^
         /// </summary>
 
-        public static class BlackMagic
+        public static class ExternalPluginFunctionExtractor
         {
+            // 2019.4.1f1 0x786D00
+            // 2019.4.21f1 : 0x0792350
 
-            public static void LoadBlackMagic()
+            /// <summary>
+            /// Use this if you're using a different engine version. Decompile UnityPlayer.dll with IDA PRO and get the pdb files for it from 
+            /// </summary>
+            public static void SetFindAndLoadPluginFunctionOffset(int offset)
             {
-                Debug.Log("Loading black magic");
+                FindAndLoadUnityPluginOffset = offset;
+            }
+
+            public static int FindAndLoadUnityPluginOffset = 0x0792350;
+
+            public static void GetLoadPluginFunction()
+            {
+                Debug.Log("Loading external plugin load function");
                 var process = Process.GetCurrentProcess();
                 foreach (ProcessModule module in process.Modules)
                 {
                     Debug.Log(module.FileName);
                     if (!module.FileName.Contains("UnityPlayer")) continue;
 
-                    var loadLibraryAddress = module.BaseAddress + 0x786D00;
+                    var loadLibraryAddress = module.BaseAddress + FindAndLoadUnityPluginOffset;
                     var dg = Marshal.GetDelegateForFunctionPointer<FindAndLoadUnityPlugin>(loadLibraryAddress);
 
                     var strPtr = Marshal.StringToHGlobalAnsi(OpenVRMagic.DLLName);
@@ -858,7 +887,7 @@ namespace Valve.VR
                         return;
                     }
 
-                    InitMoreBlackMagic(loaded);
+                    InitUnityHookRenderEventFuncCallback(loaded);
 
                     Marshal.FreeHGlobal(strPtr);
 
@@ -867,7 +896,7 @@ namespace Valve.VR
                 }
             }
 
-            public static void InitMoreBlackMagic(IntPtr hModule)
+            public static void InitUnityHookRenderEventFuncCallback(IntPtr hModule)
             {
                 ourGetRenderEventFunc = Marshal.GetDelegateForFunctionPointer<CallbackPointer>(GetProcAddress(hModule, "UnityHooks_GetRenderEventFunc"));
             }

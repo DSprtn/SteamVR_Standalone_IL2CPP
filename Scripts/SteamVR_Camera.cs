@@ -49,14 +49,16 @@ public class SteamVR_Camera : MonoBehaviour
     // gives us 1:1 sized pixels in the center of view, but quality can be adjusted up or
     // down using the following scale value to balance performance.
     static public float sceneResolutionScale = 1.0f;
+    static public float sceneResolutionScaleMultiplier = 1f;
+
     static private RenderTexture _sceneTexture;
 
     public static Resolution GetSceneResolution()
         {
             var vr = SteamVR.instance;
             Resolution r = new Resolution();
-            int w = (int)(vr.sceneWidth * sceneResolutionScale);
-            int h = (int)(vr.sceneHeight * sceneResolutionScale);
+            int w = (int)(vr.sceneWidth * sceneResolutionScale * sceneResolutionScaleMultiplier);
+            int h = (int)(vr.sceneHeight * sceneResolutionScale * sceneResolutionScaleMultiplier);
             r.width = w;
             r.height = h;
             return r;
@@ -87,8 +89,8 @@ public class SteamVR_Camera : MonoBehaviour
         if (vr == null)
             return null;
 
-        int w = (int)(vr.sceneWidth * sceneResolutionScale);
-        int h = (int)(vr.sceneHeight * sceneResolutionScale);
+        int w = (int)(vr.sceneWidth * sceneResolutionScale * sceneResolutionScaleMultiplier);
+        int h = (int)(vr.sceneHeight * sceneResolutionScale * sceneResolutionScaleMultiplier);
         int aa = QualitySettings.antiAliasing == 0 ? 1 : QualitySettings.antiAliasing;
         var format = hdr ? RenderTextureFormat.ARGBHalf : RenderTextureFormat.ARGB32;
 

@@ -18,6 +18,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
 using UnityEngine.XR;
+using Valve.VR.InteractionSystem;
 using Debug = UnityEngine.Debug;
 using Mathf = SteamVR_Standalone_IL2CPP.Util.Mathf;
 
@@ -639,6 +640,7 @@ namespace Valve.VR
             ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Skybox>();
             ClassInjector.RegisterTypeInIl2Cpp<SteamVR_TrackingReferenceManager>();
             ClassInjector.RegisterTypeInIl2Cpp<SteamVR_TrackedObject>();
+            ClassInjector.RegisterTypeInIl2Cpp<VelocityEstimator>();
         }
 
         static bool m_setup;
@@ -856,7 +858,7 @@ namespace Valve.VR
             // 2019.4.21f1 : 0x0792350
 
             /// <summary>
-            /// Use this if you're using a different engine version. Decompile UnityPlayer.dll with IDA PRO and get the pdb files for it from 
+            /// Use this if you're using a different engine version. Decompile UnityPlayer.dll with IDA PRO and get the pdb files for it 
             /// </summary>
             public static void SetFindAndLoadPluginFunctionOffset(int offset)
             {

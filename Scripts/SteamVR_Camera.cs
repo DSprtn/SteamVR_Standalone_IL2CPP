@@ -106,9 +106,11 @@ public class SteamVR_Camera : MonoBehaviour
 
         if (_sceneTexture == null)
         {
-            _sceneTexture = new RenderTexture(w, h, 0, format);
+            _sceneTexture = new RenderTexture(w, h, 0, format, 0);
             _sceneTexture.depth = 32;
             _sceneTexture.antiAliasing = aa;
+            _sceneTexture.useMipMap = false;
+            _sceneTexture.autoGenerateMips = false;
 
             // OpenVR assumes floating point render targets are linear unless otherwise specified.
             var colorSpace = (hdr && QualitySettings.activeColorSpace == ColorSpace.Gamma) ? EColorSpace.Gamma : EColorSpace.Auto;

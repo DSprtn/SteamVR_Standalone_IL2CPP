@@ -139,6 +139,8 @@ namespace Valve.VR
 
         public static event Action<EVREye> eyePreRenderCallback;
         public static event Action<EVREye> eyePostRenderCallback;
+        public static event Action preRenderBothEyesCallback;
+        public static event Action postBothEyesRenderedCallback;
 
         private IEnumerator RenderLoop()
         {
@@ -179,7 +181,10 @@ namespace Valve.VR
 
                 RenderExternalCamera();
 
-
+                if(preRenderBothEyesCallback != null)
+                {
+                    preRenderBothEyesCallback.Invoke();
+                }
                 var vr = SteamVR.instance;
                 RenderEye(vr, EVREye.Eye_Left);
                 RenderEye(vr, EVREye.Eye_Right);
@@ -194,6 +199,10 @@ namespace Valve.VR
                 if (cameraMask != null)
                     cameraMask.Clear();
 
+                if(postBothEyesRenderedCallback != null)
+                {
+                    postBothEyesRenderedCallback.Invoke();
+                }
             }
         }
 

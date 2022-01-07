@@ -18,7 +18,7 @@ namespace Valve.VR
 
         public static EVREye eye { get; private set; }
 
-        public static float unfocusedRenderResolution = .5f;
+        public static float unfocusedRenderResolution = 1f;
 
 
 
@@ -238,14 +238,19 @@ namespace Valve.VR
                     camera.cullingMask |= rightMask;
                 }
                 eyePreRenderCallback?.Invoke(eye);
+                var tex = camera.targetTexture;
                 camera.targetTexture = SteamVR_Camera.GetSceneTexture(camera.allowHDR);
                 camera.Render();
-                
+                camera.targetTexture = tex;
                 if (SteamVR_Camera.doomp)
                 {
                     Debug.Log(Time.frameCount.ToString() + $"/Render{eye}_OnRenderImage_src.png");
                     SteamVR_Camera.DumpRenderTexture(camera.targetTexture, Application.streamingAssetsPath + $"/Render{eye}_OnRenderImage_src.png");
+                    if(eye == EVREye.Eye_Right)
+                        SteamVR_Camera.doomp = false;
                 }
+                
+
                 camera.cullingMask = cullingMask;
             }
             eyePostRenderCallback?.Invoke(eye);

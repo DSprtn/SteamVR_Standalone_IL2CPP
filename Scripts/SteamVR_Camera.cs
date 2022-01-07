@@ -43,6 +43,7 @@ public class SteamVR_Camera : MonoBehaviour
 
     static public Material blitMaterial;
 
+    public static Action<int, int> OnResolutionChanged;
 
     // Using a single shared offscreen buffer to render the scene.  This needs to be larger
     // than the backbuffer to account for distortion correction.  The default resolution
@@ -71,6 +72,8 @@ public class SteamVR_Camera : MonoBehaviour
             // We calcuate an optimal 16:9 resolution to use with the HMD resolution because that's the best aspect for the UI rendering
             Resolution closestToAspect = hmdResolution;
             closestToAspect.height = closestToAspect.width / aspectW * aspectH;
+            closestToAspect.width += closestToAspect.width % 2;
+            closestToAspect.height += closestToAspect.height % 2;
             return closestToAspect;
         }
 
@@ -80,6 +83,8 @@ public class SteamVR_Camera : MonoBehaviour
             Resolution r = new Resolution();
             r.width = (int)vr.sceneWidth;
             r.height = (int)vr.sceneHeight;
+            r.width += r.width % 2;
+            r.height += r.height % 2;
             return r;
         }
 
@@ -91,16 +96,22 @@ public class SteamVR_Camera : MonoBehaviour
 
         int w = (int)(vr.sceneWidth * sceneResolutionScale * sceneResolutionScaleMultiplier);
         int h = (int)(vr.sceneHeight * sceneResolutionScale * sceneResolutionScaleMultiplier);
+        w += w % 2;
+        h += h % 2;
+
+
+               
         int aa = QualitySettings.antiAliasing == 0 ? 1 : QualitySettings.antiAliasing;
         var format = hdr ? RenderTextureFormat.ARGBHalf : RenderTextureFormat.ARGB32;
-
+        bool recreatedTex = false;
         if (_sceneTexture != null)
         {
             if (_sceneTexture.width != w || _sceneTexture.height != h)
             {
-                    Debug.Log($"Recreating scene texture.. Old: {_sceneTexture.width}x{_sceneTexture.height } MSAA={_sceneTexture.antiAliasing} [{aa}] New: {w}x{h} MSAA={aa} [{format}]");
+                Debug.Log($"Recreating scene texture.. Old: {_sceneTexture.width}x{_sceneTexture.height } MSAA={_sceneTexture.antiAliasing} [{aa}] New: {w}x{h} MSAA={aa} [{format}]");
                 Destroy(_sceneTexture);
                 _sceneTexture = null;
+                recreatedTex = true;
             }
         }
 
@@ -109,12 +120,14 @@ public class SteamVR_Camera : MonoBehaviour
             _sceneTexture = new RenderTexture(w, h, 0, format, 0);
             _sceneTexture.depth = 32;
             _sceneTexture.antiAliasing = aa;
-            _sceneTexture.useMipMap = false;
-            _sceneTexture.autoGenerateMips = false;
 
             // OpenVR assumes floating point render targets are linear unless otherwise specified.
             var colorSpace = (hdr && QualitySettings.activeColorSpace == ColorSpace.Gamma) ? EColorSpace.Gamma : EColorSpace.Auto;
             SteamVR.OpenVRMagic.SetColorSpace(colorSpace);
+            if(recreatedTex)
+            {
+                OnResolutionChanged?.Invoke(w,h);
+            }
         }
             
         return _sceneTexture;

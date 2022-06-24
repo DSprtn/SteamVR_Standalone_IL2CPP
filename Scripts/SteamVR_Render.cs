@@ -137,7 +137,7 @@ namespace Valve.VR
             }
         }
 
-        public static event Action<EVREye> eyePreRenderCallback;
+        public static event Action<EVREye, SteamVR_CameraMask> eyePreRenderCallback;
         public static event Action<EVREye> eyePostRenderCallback;
         public static event Action preRenderBothEyesCallback;
         public static event Action postBothEyesRenderedCallback;
@@ -237,7 +237,7 @@ namespace Valve.VR
                     camera.cullingMask &= ~leftMask;
                     camera.cullingMask |= rightMask;
                 }
-                eyePreRenderCallback?.Invoke(eye);
+                eyePreRenderCallback?.Invoke(eye, cameraMask);
                 var tex = camera.targetTexture;
                 camera.targetTexture = SteamVR_Camera.GetSceneTexture(camera.allowHDR);
                 camera.Render();

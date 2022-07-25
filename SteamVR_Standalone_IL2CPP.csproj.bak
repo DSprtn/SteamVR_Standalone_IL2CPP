@@ -112,39 +112,39 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Il2CppMono.Security">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppMono.Security.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\Il2CppMono.Security.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2Cppmscorlib">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2Cppmscorlib.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\Il2Cppmscorlib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\Il2CppSystem.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Configuration">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.Configuration.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\Il2CppSystem.Configuration.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Core">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.Core.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\Il2CppSystem.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Net.Http">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.Net.Http.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\Il2CppSystem.Net.Http.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Runtime.Serialization">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.Runtime.Serialization.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\Il2CppSystem.Runtime.Serialization.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Xml">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.Xml.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\Il2CppSystem.Xml.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Xml.Linq">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.Xml.Linq.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\Il2CppSystem.Xml.Linq.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -152,168 +152,168 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="UnhollowerBaseLib">
-      <HintPath>$(BEPINEX_PATH)\core\UnhollowerBaseLib.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\core\UnhollowerBaseLib.dll</HintPath>
     </Reference>
     <Reference Include="UnhollowerRuntimeLib">
-      <HintPath>$(BEPINEX_PATH)\core\UnhollowerRuntimeLib.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\core\UnhollowerRuntimeLib.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Unity.Postprocessing.Runtime.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Unity.TextMeshPro.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\Unity.TextMeshPro.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.AIModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.AIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AndroidJNIModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.AndroidJNIModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.AndroidJNIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AnimationModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.AnimationModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.AnimationModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AssetBundleModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.AssetBundleModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.AssetBundleModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AudioModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.AudioModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.AudioModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.ClothModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.ClothModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.ClothModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CrashReportingModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.CrashReportingModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.CrashReportingModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.DirectorModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.DirectorModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.DirectorModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.GridModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.GridModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.GridModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.ImageConversionModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.ImageConversionModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.IMGUIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.InputLegacyModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.InputModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.InputModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.InputModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.ParticleSystemModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.PerformanceReportingModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.PerformanceReportingModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.PerformanceReportingModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.Physics2DModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.Physics2DModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.Physics2DModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.PhysicsModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.PhysicsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.ScreenCaptureModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.ScreenCaptureModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.ScreenCaptureModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.SharedInternalsModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.SharedInternalsModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.SharedInternalsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.SpriteMaskModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.SpriteMaskModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.SpriteMaskModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.SubsystemsModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.SubsystemsModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.SubsystemsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TerrainModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.TerrainModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.TerrainModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TextCoreModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.TextCoreModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.TextCoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.TextRenderingModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TilemapModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.TilemapModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.TilemapModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.UI.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UIElementsModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.UIElementsModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.UIElementsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UIModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.UIModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.UIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityAnalyticsModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.UnityAnalyticsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.UnityWebRequestModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestWWWModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.VFXModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.VFXModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.VFXModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.VideoModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.VideoModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.VideoModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.VRModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.VRModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.VRModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.XRModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.XRModule.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityEngine.XRModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityFileDebug-ASM">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityFileDebug-ASM.dll</HintPath>
+      <HintPath>$(GTFO_PATH)\BepInEx\unhollowed\UnityFileDebug-ASM.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -322,6 +322,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "$(BEPINEX_PATH)\plugins" /E /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetPath)" "$(GTFO_PATH)\BepInEx\plugins" /E /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>

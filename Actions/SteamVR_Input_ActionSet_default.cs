@@ -36,22 +36,6 @@ namespace Valve.VR
             }
         }
 
-        public virtual SteamVR_Action_Boolean SnapTurnLeft
-        {
-            get
-            {
-                return SteamVR_Actions.default_SnapTurnLeft;
-            }
-        }
-
-        public virtual SteamVR_Action_Boolean SnapTurnRight
-        {
-            get
-            {
-                return SteamVR_Actions.default_SnapTurnRight;
-            }
-        }
-
         public virtual SteamVR_Action_Vector2 Movement
         {
             get
@@ -161,6 +145,54 @@ namespace Valve.VR
             get
             {
                 return SteamVR_Actions.default_Ping;
+            }
+        }
+
+        public virtual SteamVR_Action_Vector2 SnapTurn
+        {
+            get
+            {
+                return SteamVR_Actions.default_SnapTurn;
+            }
+        }
+
+        public virtual SteamVR_Action_Boolean AimOrShove
+        {
+            get
+            {
+                return SteamVR_Actions.default_AimOrShove;
+            }
+        }
+
+        public virtual SteamVR_Action_Boolean OpenObjectives
+        {
+            get
+            {
+                return SteamVR_Actions.default_OpenObjectives;
+            }
+        }
+
+        public virtual SteamVR_Action_Boolean WeaponRadialMenu
+        {
+            get
+            {
+                return SteamVR_Actions.default_WeaponRadialMenu;
+            }
+        }
+
+        public virtual SteamVR_Action_Boolean ToggleLaserPointer
+        {
+            get
+            {
+                return SteamVR_Actions.default_ToggleLaserPointer;
+            }
+        }
+
+        public virtual SteamVR_Action_Boolean WatchRadialMenu
+        {
+            get
+            {
+                return SteamVR_Actions.default_WatchRadialMenu;
             }
         }
 

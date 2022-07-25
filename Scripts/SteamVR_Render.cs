@@ -18,7 +18,7 @@ namespace Valve.VR
 
         public static EVREye eye { get; private set; }
 
-        public static float unfocusedRenderResolution = .5f;
+        public static float unfocusedRenderResolution = 1f;
 
 
 
@@ -137,8 +137,10 @@ namespace Valve.VR
             }
         }
 
-        public static event Action<EVREye> eyePreRenderCallback;
+        public static event Action<EVREye, SteamVR_CameraMask> eyePreRenderCallback;
         public static event Action<EVREye> eyePostRenderCallback;
+        public static event Action preRenderBothEyesCallback;
+        public static event Action postBothEyesRenderedCallback;
 
         private IEnumerator RenderLoop()
         {
@@ -179,7 +181,10 @@ namespace Valve.VR
 
                 RenderExternalCamera();
 
-
+                if(preRenderBothEyesCallback != null)
+                {
+                    preRenderBothEyesCallback.Invoke();
+                }
                 var vr = SteamVR.instance;
                 RenderEye(vr, EVREye.Eye_Left);
                 RenderEye(vr, EVREye.Eye_Right);
@@ -194,6 +199,10 @@ namespace Valve.VR
                 if (cameraMask != null)
                     cameraMask.Clear();
 
+                if(postBothEyesRenderedCallback != null)
+                {
+                    postBothEyesRenderedCallback.Invoke();
+                }
             }
         }
 
@@ -228,15 +237,20 @@ namespace Valve.VR
                     camera.cullingMask &= ~leftMask;
                     camera.cullingMask |= rightMask;
                 }
-                eyePreRenderCallback?.Invoke(eye);
+                eyePreRenderCallback?.Invoke(eye, cameraMask);
+                var tex = camera.targetTexture;
                 camera.targetTexture = SteamVR_Camera.GetSceneTexture(camera.allowHDR);
                 camera.Render();
-                
+                camera.targetTexture = tex;
                 if (SteamVR_Camera.doomp)
                 {
                     Debug.Log(Time.frameCount.ToString() + $"/Render{eye}_OnRenderImage_src.png");
                     SteamVR_Camera.DumpRenderTexture(camera.targetTexture, Application.streamingAssetsPath + $"/Render{eye}_OnRenderImage_src.png");
+                    if(eye == EVREye.Eye_Right)
+                        SteamVR_Camera.doomp = false;
                 }
+                
+
                 camera.cullingMask = cullingMask;
             }
             eyePostRenderCallback?.Invoke(eye);

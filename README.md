@@ -7,7 +7,7 @@ A modified SteamVR plugin that can be injected into Non-VR enabled Unity project
 
 Set BEPINEX_PATH as a env variable to point to the bepinex folder of the game you're trying to mod. (i.e. ...\SteamApps\$GAME$\Bepinex), this will grab most references. Newtonsoft should be pulled automatically.
 
-You need to replace the memory offset in the SteamVR/BlackMagic class with the memory offset of FindAndLoadUnityPlugin 
+You need to replace the memory offset in the SteamVR/ExternalPluginFunctionExtractor class with the memory offset of FindAndLoadUnityPlugin 
 from UnityPlayer.DLL (in your game install folder) for the exact Unity version your game is using.
 
 var loadLibraryAddress = module.BaseAddress + >>> 0x786D00 <<<

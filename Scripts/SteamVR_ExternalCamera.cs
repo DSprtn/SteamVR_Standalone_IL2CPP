@@ -5,6 +5,7 @@
 //=============================================================================
 
 using System;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Valve.VR;
@@ -141,12 +142,12 @@ namespace Valve.VR
             trackedObject.SetDeviceIndex(deviceIndex);
         }
 
-        void OnChanged(object source, System.IO.FileSystemEventArgs e)
+        void OnChanged(object source, FileSystemEventArgs e)
         {
             ReadConfig();
         }
 
-        System.IO.FileSystemWatcher watcher;
+        FileSystemWatcher watcher;
 #else
 	}
 #endif

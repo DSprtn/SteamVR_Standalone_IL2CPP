@@ -238,9 +238,7 @@ public static class SteamVR_Utils
     {
 
         Texture2D texture2D = new Texture2D(4096, 4096, TextureFormat.ARGB32, false);
-        Stopwatch stopwatch = new Stopwatch();
         Camera camera = null;
-        stopwatch.Start();
         Camera camera2 = target.GetComponent<Camera>();
         if (camera2 == null)
         {
@@ -374,8 +372,6 @@ public static class SteamVR_Utils
         }
         UnityEngine.Object.DestroyImmediate(renderTexture2);
         UnityEngine.Object.DestroyImmediate(steamVR_SphericalProjection);
-        stopwatch.Stop();
-        UnityEngine.Debug.Log(string.Format("Screenshot took {0} seconds.", stopwatch.Elapsed));
         if (camera != null)
         {
             UnityEngine.Object.DestroyImmediate(camera.gameObject);

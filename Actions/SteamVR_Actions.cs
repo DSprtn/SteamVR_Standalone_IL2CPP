@@ -40,6 +40,8 @@ namespace Valve.VR
 
         private static SteamVR_Action_Boolean p_default_Ping;
 
+        private static SteamVR_Action_Boolean p_default_OpenAndSelectComms;
+
         private static SteamVR_Action_Vector2 p_default_SnapTurn;
 
         private static SteamVR_Action_Boolean p_default_AimOrShove;
@@ -198,6 +200,14 @@ namespace Valve.VR
             }
         }
 
+        public static SteamVR_Action_Boolean default_OpenAndSelectComms
+        {
+            get
+            {
+                return SteamVR_Actions.p_default_OpenAndSelectComms.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+
         public static SteamVR_Action_Vector2 default_SnapTurn
         {
             get
@@ -275,6 +285,7 @@ namespace Valve.VR
                     SteamVR_Actions.default_OpenMap,
                     SteamVR_Actions.default_OpenMenu,
                     SteamVR_Actions.default_Ping,
+                    SteamVR_Actions.default_OpenAndSelectComms,
                     SteamVR_Actions.default_SnapTurn,
                     SteamVR_Actions.default_AimOrShove,
                     SteamVR_Actions.default_OpenObjectives,
@@ -301,6 +312,7 @@ namespace Valve.VR
                     SteamVR_Actions.default_OpenMap,
                     SteamVR_Actions.default_OpenMenu,
                     SteamVR_Actions.default_Ping,
+                    SteamVR_Actions.default_OpenAndSelectComms,
                     SteamVR_Actions.default_SnapTurn,
                     SteamVR_Actions.default_AimOrShove,
                     SteamVR_Actions.default_OpenObjectives,
@@ -328,6 +340,7 @@ namespace Valve.VR
                     SteamVR_Actions.default_OpenMap,
                     SteamVR_Actions.default_OpenMenu,
                     SteamVR_Actions.default_Ping,
+                    SteamVR_Actions.default_OpenAndSelectComms,
                     SteamVR_Actions.default_AimOrShove,
                     SteamVR_Actions.default_OpenObjectives,
                     SteamVR_Actions.default_WeaponRadialMenu,
@@ -357,6 +370,7 @@ namespace Valve.VR
                     SteamVR_Actions.default_OpenMap,
                     SteamVR_Actions.default_OpenMenu,
                     SteamVR_Actions.default_Ping,
+                    SteamVR_Actions.default_OpenAndSelectComms,
                     SteamVR_Actions.default_SnapTurn,
                     SteamVR_Actions.default_AimOrShove,
                     SteamVR_Actions.default_OpenObjectives,
@@ -385,6 +399,7 @@ namespace Valve.VR
             SteamVR_Actions.p_default_OpenMap = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/OpenMap")));
             SteamVR_Actions.p_default_OpenMenu = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/OpenMenu")));
             SteamVR_Actions.p_default_Ping = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Ping")));
+            SteamVR_Actions.p_default_OpenAndSelectComms = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/OpenAndSelectComms")));
             SteamVR_Actions.p_default_SnapTurn = ((SteamVR_Action_Vector2)(SteamVR_Action.Create<SteamVR_Action_Vector2>("/actions/default/in/SnapTurn")));
             SteamVR_Actions.p_default_AimOrShove = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/AimOrShove")));
             SteamVR_Actions.p_default_OpenObjectives = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/OpenObjectives")));

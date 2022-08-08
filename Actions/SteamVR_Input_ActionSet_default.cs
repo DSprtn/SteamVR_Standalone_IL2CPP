@@ -148,6 +148,14 @@ namespace Valve.VR
             }
         }
 
+        public virtual SteamVR_Action_Boolean OpenAndSelectComms
+        {
+            get
+            {
+                return SteamVR_Actions.default_OpenAndSelectComms;
+            }
+        }
+
         public virtual SteamVR_Action_Vector2 SnapTurn
         {
             get

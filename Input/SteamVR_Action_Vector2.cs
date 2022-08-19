@@ -170,7 +170,13 @@ namespace Valve.VR
             sourceMap[inputSource].onAxis -= functionToStopCalling;
         }
 
-
+        /// <summary>
+        /// Removes all listeners, useful for dispose pattern
+        /// </summary>
+        public void RemoveAllListeners(SteamVR_Input_Sources input_Sources)
+        {
+            sourceMap[input_Sources].RemoveAllListeners();
+        }
     }
 
     /// <summary>
@@ -262,7 +268,7 @@ namespace Valve.VR
         protected SteamVR_Action_Vector2 vector2Action;
 
         /// <summary>
-        /// <strong>[Should not be called by user code]</strong> Sets up the internals of the action source before SteamVR_Standalone has been initialized.
+        /// <strong>[Should not be called by user code]</strong> Sets up the internals of the action source before SteamVR has been initialized.
         /// </summary>
         public override void Preinitialize(SteamVR_Action wrappingAction, SteamVR_Input_Sources forInputSource)
         {
@@ -272,7 +278,7 @@ namespace Valve.VR
 
         /// <summary>
         /// <strong>[Should not be called by user code]</strong>
-        /// Initializes the handle for the inputSource, the action data size, and any other related SteamVR_Standalone data.
+        /// Initializes the handle for the inputSource, the action data size, and any other related SteamVR data.
         /// </summary>
         public override void Initialize()
         {
@@ -280,6 +286,38 @@ namespace Valve.VR
 
             if (actionData_size == 0)
                 actionData_size = (uint)Marshal.SizeOf(typeof(InputAnalogActionData_t));
+        } 
+        
+        /// <summary>
+        /// Removes all listeners, useful for dispose pattern
+        /// </summary>
+        public void RemoveAllListeners()
+        {
+            Delegate[] delegates;
+
+            if (onAxis != null)
+            {
+                delegates = onAxis.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onAxis -= (SteamVR_Action_Vector2.AxisHandler)existingDelegate;
+            }
+
+            if (onUpdate != null)
+            {
+                delegates = onUpdate.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onUpdate -= (SteamVR_Action_Vector2.UpdateHandler)existingDelegate;
+            }
+
+            if (onChange != null)
+            {
+                delegates = onChange.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onChange -= (SteamVR_Action_Vector2.ChangeHandler)existingDelegate;
+            }
         }
 
         /// <summary><strong>[Should not be called by user code]</strong>
@@ -294,7 +332,7 @@ namespace Valve.VR
 
             EVRInputError err = OpenVR.Input.GetAnalogActionData(handle, ref actionData, actionData_size, SteamVR_Input_Source.GetHandle(inputSource));
             if (err != EVRInputError.None)
-                Debug.LogError("<b>[SteamVR_Standalone]</b> GetAnalogActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString());
+                Debug.LogError("<b>[SteamVR]</b> GetAnalogActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString());
 
             updateTime = Time.realtimeSinceStartup;
             axis = new Vector2(actionData.x, actionData.y);

@@ -4,23 +4,19 @@
 //
 //=============================================================================
 
-using System;
 using UnityEngine;
 
 namespace Valve.VR
 {
     public class SteamVR_IK : MonoBehaviour
     {
-        public SteamVR_IK(IntPtr value)
-: base(value) { }
-
-
         public Transform target;
         public Transform start, joint, end;
         public Transform poleVector, upVector;
 
         public float blendPct = 1.0f;
 
+        
         public Transform startXform, jointXform, endXform;
 
         void LateUpdate()

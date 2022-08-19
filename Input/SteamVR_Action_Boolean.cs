@@ -13,7 +13,7 @@ namespace Valve.VR
     /// <summary>
     /// Boolean actions are either true or false. There are a variety of helper events included that will fire for the given input source. They're prefixed with "on".
     /// </summary>
-    public class SteamVR_Action_Boolean : SteamVR_Action_In<SteamVR_Action_Boolean_Source_Map, SteamVR_Action_Boolean_Source>, ISteamVR_Action_Boolean//, ISerializationCallbackReceiver
+    public class SteamVR_Action_Boolean : SteamVR_Action_In<SteamVR_Action_Boolean_Source_Map, SteamVR_Action_Boolean_Source>, ISteamVR_Action_Boolean
     {
         public delegate void StateDownHandler(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource);
         public delegate void StateUpHandler(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource);
@@ -213,6 +213,13 @@ namespace Valve.VR
             sourceMap[inputSource].onStateUp -= functionToStopCalling;
         }
 
+        /// <summary>
+        /// Remove all listeners registered in the source, useful for Dispose pattern
+        /// </summary>
+        public void RemoveAllListeners(SteamVR_Input_Sources input_Sources)
+        {
+            sourceMap[input_Sources].RemoveAllListeners();
+        }
     }
 
     public class SteamVR_Action_Boolean_Source_Map : SteamVR_Action_In_Source_Map<SteamVR_Action_Boolean_Source>
@@ -311,7 +318,7 @@ namespace Valve.VR
         protected SteamVR_Action_Boolean booleanAction;
 
         /// <summary>
-        /// <strong>[Should not be called by user code]</strong> Sets up the internals of the action source before SteamVR_Standalone has been initialized.
+        /// <strong>[Should not be called by user code]</strong> Sets up the internals of the action source before SteamVR has been initialized.
         /// </summary>
         public override void Preinitialize(SteamVR_Action wrappingAction, SteamVR_Input_Sources forInputSource)
         {
@@ -321,7 +328,7 @@ namespace Valve.VR
 
         /// <summary>
         /// <strong>[Should not be called by user code]</strong>
-        /// Initializes the handle for the inputSource, the action data size, and any other related SteamVR_Standalone data.
+        /// Initializes the handle for the inputSource, the action data size, and any other related SteamVR data.
         /// </summary>
         public override void Initialize()
         {
@@ -330,6 +337,38 @@ namespace Valve.VR
             if (actionData_size == 0)
                 actionData_size = (uint)Marshal.SizeOf(typeof(InputDigitalActionData_t));
 
+        }
+
+        /// <summary>
+        /// Remove all listeners, useful for Dispose pattern
+        /// </summary>
+        public void RemoveAllListeners()
+        {
+            Delegate[] delegates;
+
+            if (onStateDown != null)
+            {
+                delegates = onStateDown.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onStateDown -= (SteamVR_Action_Boolean.StateDownHandler)existingDelegate;
+            }
+
+            if (onStateUp != null)
+            {
+                delegates = onStateUp.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onStateUp -= (SteamVR_Action_Boolean.StateUpHandler)existingDelegate;
+            }
+
+            if (onState != null)
+            {
+                delegates = onState.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onState -= (SteamVR_Action_Boolean.StateHandler)existingDelegate;
+            }
         }
 
         /// <summary><strong>[Should not be called by user code]</strong>
@@ -342,12 +381,7 @@ namespace Valve.VR
 
             EVRInputError err = OpenVR.Input.GetDigitalActionData(action.handle, ref actionData, actionData_size, inputSourceHandle);
             if (err != EVRInputError.None)
-                Debug.LogWarning("<b>[SteamVR_Standalone]</b> GetDigitalActionData error (" + action.fullPath + "): " + err.ToString() + " handle: " + action.handle.ToString());
-
-            if(action.handle == 0)
-            {
-                Debug.LogError($"Action {action.GetShortName()} seems to have an incorrect handle!");
-            }
+                Debug.LogError("<b>[SteamVR]</b> GetDigitalActionData error (" + action.fullPath + "): " + err.ToString() + " handle: " + action.handle.ToString());
 
             if (changed)
                 changedTime = Time.realtimeSinceStartup + actionData.fUpdateTime;

@@ -16,28 +16,20 @@ namespace Valve.VR
     /// </summary>
     public class SteamVR_Behaviour_Single : MonoBehaviour
     {
-
-        public SteamVR_Behaviour_Single(IntPtr value)
-: base(value) { }
-
         /// <summary>The single action to get data from.</summary>
         public SteamVR_Action_Single singleAction;
 
         /// <summary>The device this action applies to. Any if the action is not device specific.</summary>
-
         public SteamVR_Input_Sources inputSource;
 
-        /// <summary>Unity event that Fires whenever the action's value has changed since the last update.</summary>
+        ///// <summary>Unity event that Fires whenever the action's value has changed since the last update.</summary>
+        //public SteamVR_Behaviour_SingleEvent onChange;
 
-        public SteamVR_Behaviour_SingleEvent onChange;
+        ///// <summary>Unity event that Fires whenever the action's value has been updated</summary>
+        //public SteamVR_Behaviour_SingleEvent onUpdate;
 
-        /// <summary>Unity event that Fires whenever the action's value has been updated</summary>
-
-        public SteamVR_Behaviour_SingleEvent onUpdate;
-
-        /// <summary>Unity event that Fires whenever the action's value has been updated and is non-zero</summary>
-
-        public SteamVR_Behaviour_SingleEvent onAxis;
+        ///// <summary>Unity event that Fires whenever the action's value has been updated and is non-zero</summary>
+        //public SteamVR_Behaviour_SingleEvent onAxis;
 
         /// <summary>C# event that fires whenever the action's value has changed since the last update.</summary>
         public ChangeHandler onChangeEvent;
@@ -55,7 +47,7 @@ namespace Valve.VR
         {
             if (singleAction == null)
             {
-                Debug.LogError("[SteamVR_Standalone] Single action not set.", this);
+                Debug.LogError("[SteamVR] Single action not set.", this);
                 return;
             }
 
@@ -86,10 +78,10 @@ namespace Valve.VR
 
         private void SteamVR_Behaviour_Single_OnUpdate(SteamVR_Action_Single fromAction, SteamVR_Input_Sources fromSource, float newAxis, float newDelta)
         {
-            if (onUpdate != null)
-            {
-                onUpdate.Invoke(this, fromSource, newAxis, newDelta);
-            }
+            //if (onUpdate != null)
+            //{
+            //    onUpdate.Invoke(this, fromSource, newAxis, newDelta);
+            //}
 
             if (onUpdateEvent != null)
             {
@@ -99,10 +91,10 @@ namespace Valve.VR
 
         private void SteamVR_Behaviour_Single_OnChange(SteamVR_Action_Single fromAction, SteamVR_Input_Sources fromSource, float newAxis, float newDelta)
         {
-            if (onChange != null)
-            {
-                onChange.Invoke(this, fromSource, newAxis, newDelta);
-            }
+            //if (onChange != null)
+            //{
+            //    onChange.Invoke(this, fromSource, newAxis, newDelta);
+            //}
 
             if (onChangeEvent != null)
             {
@@ -112,10 +104,10 @@ namespace Valve.VR
 
         private void SteamVR_Behaviour_Single_OnAxis(SteamVR_Action_Single fromAction, SteamVR_Input_Sources fromSource, float newAxis, float newDelta)
         {
-            if (onAxis != null)
-            {
-                onAxis.Invoke(this, fromSource, newAxis, newDelta);
-            }
+            //if (onAxis != null)
+            //{
+            //    onAxis.Invoke(this, fromSource, newAxis, newDelta);
+            //}
 
             if (onAxisEvent != null)
             {
@@ -125,7 +117,7 @@ namespace Valve.VR
 
 
         /// <summary>
-
+        /// Gets the localized name of the device that the action corresponds to.
         /// </summary>
         /// <param name="localizedParts">
         /// <list type="bullet">

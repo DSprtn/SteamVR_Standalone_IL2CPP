@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Valve.VR
 {
     public class SteamVR_TrackingReferenceManager : MonoBehaviour
     {
-
-        public SteamVR_TrackingReferenceManager(IntPtr value)
-: base(value) { }
-
         private Dictionary<uint, TrackingReferenceObject> trackingReferences = new Dictionary<uint, TrackingReferenceObject>();
 
         private void OnEnable()
@@ -48,7 +42,7 @@ namespace Valve.VR
 
                         trackingReferences.Add(deviceIndex, trackingReference);
 
-                        foreach(SteamVR_RenderModel model in GetComponentsInChildren<SteamVR_RenderModel>())
+                        foreach (SteamVR_RenderModel model in GetComponentsInChildren<SteamVR_RenderModel>())
                         {
                             model.SetDeviceIndex((int)deviceIndex);
                         }

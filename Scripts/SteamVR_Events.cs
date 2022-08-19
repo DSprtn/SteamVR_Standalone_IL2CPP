@@ -1,6 +1,6 @@
 ﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 //
-// Purpose: Simple event system for SteamVR_Standalone.
+// Purpose: Simple event system for SteamVR.
 //
 // Example usage:
 //
@@ -17,6 +17,7 @@
 //
 //=============================================================================
 
+using Il2CppSystem.Reflection;
 using UnityEngine;
 using UnityEngine.Events;
 using Valve.VR;
@@ -25,7 +26,6 @@ namespace Valve.VR
 {
     public static class SteamVR_Events
     {
-
         public abstract class Action
         {
             public abstract void Enable(bool enabled);
@@ -116,16 +116,16 @@ namespace Valve.VR
             System.Action<T0, T1, T2> action;
         }
 
-
-
-        public class Event
+        public class Event 
         {
             public event System.Action OnEvent;
 
 
             public void Listen(System.Action action) { OnEvent += action; }
             public void Remove(System.Action action) { OnEvent -= action; }
-            public void Send() { if (OnEvent != null)
+            public void Send()
+            {
+                if (OnEvent != null)
                 {
                     OnEvent.Invoke();
                 }
@@ -149,7 +149,6 @@ namespace Valve.VR
                 }
             }
         }
-             
 
         public class Event<T0, T1>
         {
@@ -157,7 +156,8 @@ namespace Valve.VR
 
             public void Listen(System.Action<T0, T1> action) { OnEvent += action; }
             public void Remove(System.Action<T0, T1> action) { OnEvent -= action; }
-            public void Send(T0 arg0, T1 arg1) {
+            public void Send(T0 arg0, T1 arg1)
+            {
                 if (OnEvent != null)
                 {
                     {
@@ -167,13 +167,14 @@ namespace Valve.VR
             }
         }
 
-        public class Event<T0, T1, T2>
+        public class Event<T0, T1, T2> : UnityEvent<T0, T1, T2>
         {
             public event System.Action<T0, T1, T2> OnEvent;
 
             public void Listen(System.Action<T0, T1, T2> action) { OnEvent += action; }
             public void Remove(System.Action<T0, T1, T2> action) { OnEvent -= action; }
-            public void Send(T0 arg0, T1 arg1, T2 arg2) {
+            public void Send(T0 arg0, T1 arg1, T2 arg2)
+            {
                 if (OnEvent != null)
                 {
                     {
@@ -182,7 +183,6 @@ namespace Valve.VR
                 }
             }
         }
-
 
         public static Event<bool> Calibrating = new Event<bool>();
         public static Action CalibratingAction(System.Action<bool> action) { return new Action<bool>(Calibrating, action); }
@@ -215,9 +215,7 @@ namespace Valve.VR
         public static Action LoadingFadeOutAction(System.Action<float> action) { return new Action<float>(LoadingFadeOut, action); }
 
         public static Event<TrackedDevicePose_t[]> NewPoses = new Event<TrackedDevicePose_t[]>();
-        public static Action NewPosesAction(System.Action<TrackedDevicePose_t[]> action) { 
-            return new Action<TrackedDevicePose_t[]>(NewPoses, action); 
-        }
+        public static Action NewPosesAction(System.Action<TrackedDevicePose_t[]> action) { return new Action<TrackedDevicePose_t[]>(NewPoses, action); }
 
         public static Event NewPosesApplied = new Event();
         public static Action NewPosesAppliedAction(System.Action action) { return new ActionNoArgs(NewPosesApplied, action); }

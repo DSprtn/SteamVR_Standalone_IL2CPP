@@ -4,7 +4,6 @@
 //
 //=============================================================================
 
-using System;
 using UnityEngine;
 using Valve.VR;
 
@@ -12,9 +11,6 @@ namespace Valve.VR
 {
     public class SteamVR_TrackedObject : MonoBehaviour
     {
-        public SteamVR_TrackedObject(IntPtr value)
-: base(value) { }
-
         public enum EIndex
         {
             None = -1,
@@ -39,6 +35,7 @@ namespace Valve.VR
 
         public EIndex index;
 
+        
         public Transform origin;
 
         public bool isValid { get; private set; }
@@ -76,19 +73,34 @@ namespace Valve.VR
             }
         }
 
+        SteamVR_Events.Action newPosesAction;
+
+        SteamVR_TrackedObject()
+        {
+            newPosesAction = SteamVR_Events.NewPosesAction(OnNewPoses);
+        }
+
         private void Awake()
         {
-            SteamVR_Events.NewPoses.Listen(OnNewPoses);
+            OnEnable();
+        }
+
+        void OnEnable()
+        {
+            var render = SteamVR_Render.instance;
+            if (render == null)
+            {
+                enabled = false;
+                return;
+            }
+
+            newPosesAction.enabled = true;
         }
 
         void OnDisable()
         {
+            newPosesAction.enabled = false;
             isValid = false;
-        }
-
-        void OnDestroy()
-        {
-            SteamVR_Events.NewPoses.Remove(OnNewPoses);
         }
 
         public void SetDeviceIndex(int index)

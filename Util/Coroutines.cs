@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using UnhollowerBaseLib;
 using UnityEngine;
 
-namespace SteamVR_Standalone_IL2CPP.Util
+namespace Valve.VR
 {
 
     /// <summary>

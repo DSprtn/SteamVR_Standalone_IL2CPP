@@ -1,6 +1,6 @@
 //======= Copyright (c) Valve Corporation, All rights reserved. ===============
 //
-// Purpose:	CameraFade script adapted to work with SteamVR_Standalone.
+// Purpose:	CameraFade script adapted to work with SteamVR.
 //
 // Usage:	Add to your top level SteamVR_Camera (the one with ApplyDistoration
 //			checked) and drag a reference to this component into SteamVR_Camera
@@ -19,20 +19,13 @@
 //
 //=============================================================================
 
-using Assets.SteamVR_Standalone.Standalone;
-using System;
 using UnityEngine;
-using UnityEngine.Events;
 using Valve.VR;
 
 namespace Valve.VR
 {
     public class SteamVR_Fade : MonoBehaviour
     {
-
-        public SteamVR_Fade(IntPtr value)
-: base(value) { }
-
         private Color currentColor = new Color(0, 0, 0, 0); // default starting color: black and fully transparent
         private Color targetColor = new Color(0, 0, 0, 0);  // default target color: black and fully transparent
         private Color deltaColor = new Color(0, 0, 0, 0);   // the delta-color is basically the "speed / second" at which the current color should change
@@ -49,6 +42,17 @@ namespace Valve.VR
             if (compositor != null)
                 compositor.FadeToColor(duration, newColor.r, newColor.g, newColor.b, newColor.a, false);
         }
+
+#if TEST_FADE_VIEW
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			SteamVR_Fade.View(Color.black, 0);
+			SteamVR_Fade.View(Color.clear, 1);
+		}
+	}
+#endif
 
         public void OnStartFade(Color newColor, float duration, bool fadeOverlay)
         {
@@ -70,7 +74,7 @@ namespace Valve.VR
         {
             if (fadeMaterial == null)
             {
-                fadeMaterial = new Material(VRShaders.GetShader(VRShaders.VRShader.fade));
+                fadeMaterial = new Material(Shader.Find("Custom/SteamVR_Fade"));
                 fadeMaterialColorID = Shader.PropertyToID("fadeColor");
             }
 

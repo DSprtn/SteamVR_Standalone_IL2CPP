@@ -7,25 +7,18 @@
 using UnityEngine;
 using System.Collections;
 using Valve.VR;
-using System;
 
 namespace Valve.VR
 {
     public class SteamVR_Overlay : MonoBehaviour
     {
-
-        public SteamVR_Overlay(IntPtr value)
-       : base(value) { }
-
-
         public Texture texture;
 
-
+        
         public float scale = 3.0f;
 
-
+        
         public float distance = 1.25f;
-
 
         public float alpha = 1.0f;
 
@@ -48,7 +41,7 @@ namespace Valve.VR
                 var error = overlay.CreateOverlay(key, gameObject.name, ref handle);
                 if (error != EVROverlayError.None)
                 {
-                    Debug.Log("<b>[SteamVR_Standalone]</b> " + overlay.GetOverlayErrorNameFromEnum(error));
+                    Debug.Log("<b>[SteamVR]</b> " + overlay.GetOverlayErrorNameFromEnum(error));
                     enabled = false;
                     return;
                 }

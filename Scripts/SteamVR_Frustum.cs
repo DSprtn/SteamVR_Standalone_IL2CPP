@@ -4,43 +4,35 @@
 //
 //=============================================================================
 
-using SteamVR_Standalone_IL2CPP.Util;
-using System;
 using UnityEngine;
-using UnityEngine.Events;
 using Valve.VR;
 
 namespace Valve.VR
 {
-
     public class SteamVR_Frustum : MonoBehaviour
     {
-
-        public SteamVR_Frustum(IntPtr value)
-: base(value) { }
-
         public SteamVR_TrackedObject.EIndex index;
 
         public float fovLeft = 45, fovRight = 45, fovTop = 45, fovBottom = 45, nearZ = 0.5f, farZ = 2.5f;
 
         public void UpdateModel()
         {
-            fovLeft = SteamVR_Standalone_IL2CPP.Util.Mathf.Clamp(fovLeft, 1, 89);
-            fovRight = SteamVR_Standalone_IL2CPP.Util.Mathf.Clamp(fovRight, 1, 89);
-            fovTop = SteamVR_Standalone_IL2CPP.Util.Mathf.Clamp(fovTop, 1, 89);
-            fovBottom = SteamVR_Standalone_IL2CPP.Util.Mathf.Clamp(fovBottom, 1, 89);
-            farZ = SteamVR_Standalone_IL2CPP.Util.Mathf.Max(farZ, nearZ + 0.01f);
-            nearZ = SteamVR_Standalone_IL2CPP.Util.Mathf.Clamp(nearZ, 0.01f, farZ - 0.01f);
+            fovLeft = Mathf.Clamp(fovLeft, 1, 89);
+            fovRight = Mathf.Clamp(fovRight, 1, 89);
+            fovTop = Mathf.Clamp(fovTop, 1, 89);
+            fovBottom = Mathf.Clamp(fovBottom, 1, 89);
+            farZ = Mathf.Max(farZ, nearZ + 0.01f);
+            nearZ = Mathf.Clamp(nearZ, 0.01f, farZ - 0.01f);
 
-            var lsin = SteamVR_Standalone_IL2CPP.Util.Mathf.Sin(-fovLeft * SteamVR_Standalone_IL2CPP.Util.Mathf.Deg2Rad);
-            var rsin = SteamVR_Standalone_IL2CPP.Util.Mathf.Sin(fovRight * SteamVR_Standalone_IL2CPP.Util.Mathf.Deg2Rad);
-            var tsin = SteamVR_Standalone_IL2CPP.Util.Mathf.Sin(fovTop * SteamVR_Standalone_IL2CPP.Util.Mathf.Deg2Rad);
-            var bsin = SteamVR_Standalone_IL2CPP.Util.Mathf.Sin(-fovBottom * SteamVR_Standalone_IL2CPP.Util.Mathf.Deg2Rad);
+            var lsin = Mathf.Sin(-fovLeft * Mathf.Deg2Rad);
+            var rsin = Mathf.Sin(fovRight * Mathf.Deg2Rad);
+            var tsin = Mathf.Sin(fovTop * Mathf.Deg2Rad);
+            var bsin = Mathf.Sin(-fovBottom * Mathf.Deg2Rad);
 
-            var lcos = SteamVR_Standalone_IL2CPP.Util.Mathf.Cos(-fovLeft * SteamVR_Standalone_IL2CPP.Util.Mathf.Deg2Rad);
-            var rcos = SteamVR_Standalone_IL2CPP.Util.Mathf.Cos(fovRight * SteamVR_Standalone_IL2CPP.Util.Mathf.Deg2Rad);
-            var tcos = SteamVR_Standalone_IL2CPP.Util.Mathf.Cos(fovTop * SteamVR_Standalone_IL2CPP.Util.Mathf.Deg2Rad);
-            var bcos = SteamVR_Standalone_IL2CPP.Util.Mathf.Cos(-fovBottom * SteamVR_Standalone_IL2CPP.Util.Mathf.Deg2Rad);
+            var lcos = Mathf.Cos(-fovLeft * Mathf.Deg2Rad);
+            var rcos = Mathf.Cos(fovRight * Mathf.Deg2Rad);
+            var tcos = Mathf.Cos(fovTop * Mathf.Deg2Rad);
+            var bcos = Mathf.Cos(-fovBottom * Mathf.Deg2Rad);
 
             var corners = new Vector3[] {
             new Vector3(lsin * nearZ / lcos, tsin * nearZ / tcos, nearZ), //tln

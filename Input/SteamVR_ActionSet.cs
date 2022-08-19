@@ -18,7 +18,6 @@ namespace Valve.VR
     {
         public SteamVR_ActionSet() { }
 
-
         private string actionSetPath;
 
         [NonSerialized]
@@ -177,6 +176,22 @@ namespace Valve.VR
             {
                 setData = SteamVR_Input.GetActionSetDataFromPath(actionSetPath);
 
+                if (setData == null)
+                {
+#if UNITY_EDITOR
+                    if (throwErrors)
+                    {
+                        if (string.IsNullOrEmpty(actionSetPath))
+                        {
+                            Debug.LogError("<b>[SteamVR]</b> Action has not been assigned.");
+                        }
+                        else
+                        {
+                            Debug.LogError("<b>[SteamVR]</b> Could not find action with path: " + actionSetPath);
+                        }
+                    }
+#endif
+                }
             }
 
             initialized = true;
@@ -331,7 +346,6 @@ namespace Valve.VR
 
             return set1.Equals(set2);
         }
-
     }
     /// <summary>
     /// Action sets are logical groupings of actions. Multiple sets can be active at one time.
@@ -389,7 +403,7 @@ namespace Valve.VR
 
             if (SteamVR_Input.actions == null)
             {
-                Debug.LogError("<b>[SteamVR_Standalone Input]</b> Actions not initialized!");
+                Debug.LogError("<b>[SteamVR Input]</b> Actions not initialized!");
                 return;
             }
 
@@ -421,7 +435,7 @@ namespace Valve.VR
                     }
                     else
                     {
-                        Debug.LogError("<b>[SteamVR_Standalone Input]</b> Action doesn't implement known interface: " + action.fullPath);
+                        Debug.LogError("<b>[SteamVR Input]</b> Action doesn't implement known interface: " + action.fullPath);
                     }
                 }
             }
@@ -441,7 +455,7 @@ namespace Valve.VR
             handle = newHandle;
 
             if (err != EVRInputError.None)
-                Debug.LogError("<b>[SteamVR_Standalone]</b> GetActionSetHandle (" + fullPath + ") error: " + err.ToString());
+                Debug.LogError("<b>[SteamVR]</b> GetActionSetHandle (" + fullPath + ") error: " + err.ToString());
 
             initialized = true;
         }

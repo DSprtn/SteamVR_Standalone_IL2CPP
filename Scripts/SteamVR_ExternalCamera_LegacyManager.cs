@@ -6,7 +6,6 @@
 
 using UnityEngine;
 using System.Collections;
-using UnityEngine.Events;
 
 namespace Valve.VR
 {
@@ -22,6 +21,7 @@ namespace Valve.VR
         {
             if (newPosesAction == null)
                 newPosesAction = SteamVR_Events.NewPosesAction(OnNewPoses);
+
             newPosesAction.enabled = true;
         }
 

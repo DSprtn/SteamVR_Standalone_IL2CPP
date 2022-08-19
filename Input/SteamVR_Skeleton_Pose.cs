@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Valve.VR
 {
-    public class SteamVR_Skeleton_Pose
+    public class SteamVR_Skeleton_Pose : ScriptableObject
     {
         public SteamVR_Skeleton_Pose_Hand leftHand = new SteamVR_Skeleton_Pose_Hand(SteamVR_Input_Sources.LeftHand);
         public SteamVR_Skeleton_Pose_Hand rightHand = new SteamVR_Skeleton_Pose_Hand(SteamVR_Input_Sources.RightHand);
@@ -50,7 +50,7 @@ namespace Valve.VR
         public SteamVR_Skeleton_FingerExtensionTypes pinkyFingerMovementType = SteamVR_Skeleton_FingerExtensionTypes.Static;
 
         /// <summary>
-
+        /// Get extension type for a particular finger. Thumb is 0, Index is 1, etc.
         /// </summary>
         public SteamVR_Skeleton_FingerExtensionTypes GetFingerExtensionType(int finger)
         {

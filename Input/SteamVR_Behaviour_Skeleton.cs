@@ -1,6 +1,5 @@
 ﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 
-using SteamVR_Standalone_IL2CPP.Util;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -11,43 +10,32 @@ namespace Valve.VR
 {
     public class SteamVR_Behaviour_Skeleton : MonoBehaviour
     {
-        public SteamVR_Behaviour_Skeleton(IntPtr value)
-: base(value) { }
-
-
         /// <summary>The action this component will use to update the model. Must be a Skeleton type action.</summary>
         public SteamVR_Action_Skeleton skeletonAction;
 
         /// <summary>The device this action should apply to. Any if the action is not device specific.</summary>
-
         public SteamVR_Input_Sources inputSource;
 
         /// <summary>The range of motion you'd like the hand to move in. With controller is the best estimate of the fingers wrapped around a controller. Without is from a flat hand to a fist.</summary>
-        
         public EVRSkeletalMotionRange rangeOfMotion = EVRSkeletalMotionRange.WithoutController;
 
         /// <summary>The root Transform of the skeleton. Needs to have a child (wrist) then wrist should have children in the order thumb, index, middle, ring, pinky</summary>
-        
         public Transform skeletonRoot;
 
         /// <summary>The transform this transform should be relative to</summary>
-        
         public Transform origin;
 
         /// <summary>Whether or not to update this transform's position and rotation inline with the skeleton transforms or if this is handled in another script</summary>
-        
         public bool updatePose = true;
 
         /// <summary>Check this to not set the positions of the bones. This is helpful for differently scaled skeletons.</summary>
-        
         public bool onlySetRotations = false;
 
         /// <summary>
         /// How much of a blend to apply to the transform positions and rotations.
-
-
+        /// Set to 0 for the transform orientation to be set by an animation.
+        /// Set to 1 for the transform orientation to be set by the skeleton action.
         /// </summary>
-
         public float skeletonBlend = 1f;
 
         /// <summary>This Unity event will fire whenever the position or rotation of the bones are updated.</summary>
@@ -82,14 +70,11 @@ namespace Valve.VR
         public TrackingChangeHandler onTrackingChangedEvent;
 
         /// <summary>Can be set to mirror the bone data across the x axis</summary>
-
         public MirrorType mirroring;
-
 
 
         /// <summary>The fallback SkeletonPoser to drive hand animation when no skeleton data is available</summary>
         public SteamVR_Skeleton_Poser fallbackPoser;
-
 
         /// <summary>The fallback SkeletonPoser to drive hand animation when no skeleton data is available</summary>
         public SteamVR_Action_Single fallbackCurlAction;
@@ -257,7 +242,7 @@ namespace Valve.VR
         protected EVRSkeletalMotionRange? temporaryRangeOfMotion = null;
 
         /// <summary>
-
+        /// Get the accuracy level of the skeletal tracking data.
         /// <para/>* Estimated: Body part location can’t be directly determined by the device. Any skeletal pose provided by the device is estimated based on the active buttons, triggers, joysticks, or other input sensors. Examples include the Vive Controller and gamepads.
         /// <para/>* Partial: Body part location can be measured directly but with fewer degrees of freedom than the actual body part.Certain body part positions may be unmeasured by the device and estimated from other input data.Examples include Knuckles or gloves that only measure finger curl
         /// <para/>* Full: Body part location can be measured directly throughout the entire range of motion of the body part.Examples include hi-end mocap systems, or gloves that measure the rotation of each finger segment.
@@ -412,7 +397,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-
+        /// Sets a temporary range of motion for this action that can easily be reset (using ResetTemporaryRangeOfMotion).
         /// This is useful for short range of motion changes, for example picking up a controller shaped object
         /// </summary>
         /// <param name="newRangeOfMotion">The new range of motion you want to apply (temporarily)</param>
@@ -502,7 +487,6 @@ namespace Valve.VR
                 blendRoutine = DoBlendRoutine(blendToAmount, overTime);
                 MelonCoroutines.Start(blendRoutine);
             }
-                
         }
 
 
@@ -516,7 +500,7 @@ namespace Valve.VR
             while (Time.time < endTime)
             {
                 yield return null;
-                skeletonBlend = SteamVR_Standalone_IL2CPP.Util.Mathf.Lerp(startAmount, blendToAmount, (Time.time - startTime) / overTime);
+                skeletonBlend = Mathf.Lerp(startAmount, blendToAmount, (Time.time - startTime) / overTime);
             }
 
             skeletonBlend = blendToAmount;
@@ -772,7 +756,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-
+        /// Gets the transform for a bone by the joint index. Joint indexes specified in: SteamVR_Skeleton_JointIndexes
         /// </summary>
         /// <param name="joint">The joint index of the bone. Specified in SteamVR_Skeleton_JointIndexes</param>
         public virtual Transform GetBone(int joint)
@@ -785,7 +769,7 @@ namespace Valve.VR
 
 
         /// <summary>
-
+        /// Gets the position of the transform for a bone by the joint index. Joint indexes specified in: SteamVR_Skeleton_JointIndexes
         /// </summary>
         /// <param name="joint">The joint index of the bone. Specified in SteamVR_Skeleton_JointIndexes</param>
         /// <param name="local">true to get the localspace position for the joint (position relative to this joint's parent)</param>
@@ -798,7 +782,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-
+        /// Gets the rotation of the transform for a bone by the joint index. Joint indexes specified in: SteamVR_Skeleton_JointIndexes
         /// </summary>
         /// <param name="joint">The joint index of the bone. Specified in SteamVR_Skeleton_JointIndexes</param>
         /// <param name="local">true to get the localspace rotation for the joint (rotation relative to this joint's parent)</param>
@@ -950,6 +934,28 @@ namespace Valve.VR
                 temporarySession = SteamVR.InitializeTemporarySession(true);
                 Awake();
 
+#if UNITY_EDITOR
+                //gotta wait a bit for steamvr input to startup //todo: implement steamvr_input.isready
+                string title = "SteamVR";
+                string text = "Getting reference pose...";
+                float msToWait = 3000;
+                float increment = 100;
+                for (float timer = 0; timer < msToWait; timer += increment)
+                {
+                    bool cancel = UnityEditor.EditorUtility.DisplayCancelableProgressBar(title, text, timer / msToWait);
+                    if (cancel)
+                    {
+                        UnityEditor.EditorUtility.ClearProgressBar();
+
+                        if (temporarySession)
+                            SteamVR.ExitTemporarySession();
+                        return;
+                    }
+                    System.Threading.Thread.Sleep((int)increment);
+                }
+                UnityEditor.EditorUtility.ClearProgressBar();
+#endif
+
                 skeletonAction.actionSet.Activate();
 
                 SteamVR_ActionSet_Manager.UpdateActionStates(true);
@@ -959,7 +965,7 @@ namespace Valve.VR
 
             if (skeletonAction.active == false)
             {
-                Debug.LogError("<b>[SteamVR_Standalone Input]</b> Please turn on your " + inputSource.ToString() + " controller and ensure SteamVR_Standalone is open.", this);
+                Debug.LogError("<b>[SteamVR Input]</b> Please turn on your " + inputSource.ToString() + " controller and ensure SteamVR is open.", this);
                 return;
             }
 
@@ -967,7 +973,7 @@ namespace Valve.VR
 
             if (transforms == null || transforms.Length == 0)
             {
-                Debug.LogError("<b>[SteamVR_Standalone Input]</b> Unable to get the reference transform for " + inputSource.ToString() + ". Please make sure SteamVR_Standalone is open and both controllers are connected.", this);
+                Debug.LogError("<b>[SteamVR Input]</b> Unable to get the reference transform for " + inputSource.ToString() + ". Please make sure SteamVR is open and both controllers are connected.", this);
             }
 
             if (mirroring == MirrorType.LeftToRight || mirroring == MirrorType.RightToLeft)

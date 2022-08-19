@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.SteamVR_Standalone.Standalone
+namespace Valve.VR
 {
     public static class VRShaders
     {
@@ -59,11 +59,11 @@ namespace Assets.SteamVR_Standalone.Standalone
             }
             Debug.Log("Loading shaders from asset bundle...");
 
-            occlusion = assetBundle.LoadAsset("assets/steamvr/resources/steamvr_hiddenarea.shader").Cast<Shader>();
-            blit = assetBundle.LoadAsset("assets/steamvr/resources/steamvr_blit.shader").Cast<Shader>();
-            blitFlip = assetBundle.LoadAsset("assets/steamvr/resources/steamvr_blitFlip.shader").Cast<Shader>();
-            overlay = assetBundle.LoadAsset("assets/steamvr/resources/steamvr_overlay.shader").Cast<Shader>();
-            fade = assetBundle.LoadAsset("assets/steamvr/resources/steamvr_fade.shader").Cast<Shader>();
+            occlusion = assetBundle.LoadAsset<Object>("assets/steamvr/resources/steamvr_hiddenarea.shader").Cast<Shader>();
+            blit = assetBundle.LoadAsset<Object>("assets/steamvr/resources/steamvr_blit.shader").Cast<Shader>();
+            blitFlip = assetBundle.LoadAsset<Object>("assets/steamvr/resources/steamvr_blitFlip.shader").Cast<Shader>();
+            overlay = assetBundle.LoadAsset<Object>("assets/steamvr/resources/steamvr_overlay.shader").Cast<Shader>();
+            fade = assetBundle.LoadAsset<Object>("assets/steamvr/resources/steamvr_fade.shader").Cast<Shader>();
             string[] allAssetNames = assetBundle.GetAllAssetNames();
             for (int i = 0; i < allAssetNames.Length; i++)
             {

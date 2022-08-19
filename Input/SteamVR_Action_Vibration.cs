@@ -158,7 +158,7 @@ namespace Valve.VR
 
         /// <summary>
         /// <strong>[Should not be called by user code]</strong>
-        /// Initializes the handle for the inputSource, and any other related SteamVR_Standalone data.
+        /// Initializes the handle for the inputSource, and any other related SteamVR data.
         /// </summary>
         public override void Initialize()
         {
@@ -195,7 +195,7 @@ namespace Valve.VR
             //Debug.Log(string.Format("[{5}: haptic] secondsFromNow({0}), durationSeconds({1}), frequency({2}), amplitude({3}), inputSource({4})", secondsFromNow, durationSeconds, frequency, amplitude, inputSource, this.GetShortName()));
 
             if (err != EVRInputError.None)
-                Debug.LogError("<b>[SteamVR_Standalone]</b> TriggerHapticVibrationAction (" + fullPath + ") error: " + err.ToString() + " handle: " + handle.ToString());
+                Debug.LogError("<b>[SteamVR]</b> TriggerHapticVibrationAction (" + fullPath + ") error: " + err.ToString() + " handle: " + handle.ToString());
 
             if (onExecute != null)
                 onExecute.Invoke(vibrationAction, inputSource, secondsFromNow, durationSeconds, frequency, amplitude);

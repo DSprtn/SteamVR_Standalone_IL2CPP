@@ -17,8 +17,8 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\_VS_BUILDS\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;UNITY_2017_1_OR_NEWER,UNITY_2017_2_OR_NEWER,UNITY_5_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -26,13 +26,11 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;UNITY_2017_1_OR_NEWER,UNITY_2017_2_OR_NEWER,UNITY_5_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Actions\SteamVR_Actions.cs" />
-    <Compile Include="Actions\SteamVR_Input_ActionSet_default.cs" />
     <Compile Include="Input\BehaviourUnityEvents\SteamVR_Behaviour_BooleanEvent.cs" />
     <Compile Include="Input\BehaviourUnityEvents\SteamVR_Behaviour_PoseEvent.cs" />
     <Compile Include="Input\BehaviourUnityEvents\SteamVR_Behaviour_Pose_ConnectedChangedEvent.cs" />
@@ -62,14 +60,18 @@
     <Compile Include="Input\SteamVR_Behaviour_Pose.cs" />
     <Compile Include="Input\SteamVR_Behaviour_Single.cs" />
     <Compile Include="Input\SteamVR_Behaviour_Skeleton.cs" />
+    <Compile Include="Input\SteamVR_Behaviour_SkeletonCustom.cs" />
     <Compile Include="Input\SteamVR_Behaviour_Vector2.cs" />
     <Compile Include="Input\SteamVR_Behaviour_Vector3.cs" />
+    <Compile Include="Input\SteamVR_DefaultAction.cs" />
+    <Compile Include="Input\SteamVR_DefaultActionSet.cs" />
     <Compile Include="Input\SteamVR_Input.cs" />
     <Compile Include="Input\SteamVR_Input_ActionFile.cs" />
     <Compile Include="Input\SteamVR_Input_ActionScopes.cs" />
     <Compile Include="Input\SteamVR_Input_ActionSetUsages.cs" />
     <Compile Include="Input\SteamVR_Input_BindingFile.cs" />
     <Compile Include="Input\SteamVR_Input_Generator_Names.cs" />
+    <Compile Include="Input\SteamVR_Input_References.cs" />
     <Compile Include="Input\SteamVR_Input_Source.cs" />
     <Compile Include="Input\SteamVR_Input_Sources.cs" />
     <Compile Include="Input\SteamVR_Skeleton_Pose.cs" />
@@ -90,6 +92,8 @@
     <Compile Include="Scripts\SteamVR_Fade.cs" />
     <Compile Include="Scripts\SteamVR_Frustum.cs" />
     <Compile Include="Scripts\SteamVR_IK.cs" />
+    <Compile Include="Scripts\SteamVR_LoadLevel.cs" />
+    <Compile Include="Scripts\SteamVR_Menu.cs" />
     <Compile Include="Scripts\SteamVR_Overlay.cs" />
     <Compile Include="Scripts\SteamVR_PlayArea.cs" />
     <Compile Include="Scripts\SteamVR_Render.cs" />
@@ -102,219 +106,261 @@
     <Compile Include="Scripts\SteamVR_TrackedObject.cs" />
     <Compile Include="Scripts\SteamVR_TrackingReferenceManager.cs" />
     <Compile Include="Scripts\SteamVR_Utils.cs" />
-    <Compile Include="Scripts\VelocityEstimator.cs" />
     <Compile Include="Standalone\MelonCoroutineCallbacks.cs" />
-    <Compile Include="Standalone\SteamVR_GameView.cs" />
     <Compile Include="Standalone\VRShaders.cs" />
     <Compile Include="Util\Coroutines.cs" />
     <Compile Include="Util\UnityHooks.cs" />
-    <Compile Include="Util\UnstrippedMathf.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <Reference Include="BepInEx.Core">
+      <HintPath>..\..\..\Steam\steamapps\common\Gunfire Reborn\BepInEx\core\BepInEx.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppI18N">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\Il2CppI18N.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppI18N.CJK">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\Il2CppI18N.CJK.dll</HintPath>
+    </Reference>
     <Reference Include="Il2CppMono.Security">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppMono.Security.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\Il2CppMono.Security.dll</HintPath>
     </Reference>
     <Reference Include="Il2Cppmscorlib">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2Cppmscorlib.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\Il2Cppmscorlib.dll</HintPath>
     </Reference>
     <Reference Include="Il2CppSystem">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\Il2CppSystem.dll</HintPath>
     </Reference>
     <Reference Include="Il2CppSystem.Configuration">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.Configuration.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\Il2CppSystem.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Il2CppSystem.Core">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.Core.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\Il2CppSystem.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Il2CppSystem.Net.Http">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.Net.Http.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Il2CppSystem.Data">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\Il2CppSystem.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Diagnostics.StackTrace">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\Il2CppSystem.Diagnostics.StackTrace.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Globalization.Extensions">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\Il2CppSystem.Globalization.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.IO.Compression">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\Il2CppSystem.IO.Compression.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Numerics">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\Il2CppSystem.Numerics.dll</HintPath>
     </Reference>
     <Reference Include="Il2CppSystem.Runtime.Serialization">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.Runtime.Serialization.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\Il2CppSystem.Runtime.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem.Text.Encoding.CodePages">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\Il2CppSystem.Text.Encoding.CodePages.dll</HintPath>
     </Reference>
     <Reference Include="Il2CppSystem.Xml">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.Xml.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\Il2CppSystem.Xml.dll</HintPath>
     </Reference>
-    <Reference Include="Il2CppSystem.Xml.Linq">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.Xml.Linq.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>F:\Steam\steamapps\common\Gunfire Reborn\BepInEx\plugins\com.PureDark.VRMod\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="UnhollowerBaseLib">
-      <HintPath>$(BEPINEX_PATH)\core\UnhollowerBaseLib.dll</HintPath>
-    </Reference>
-    <Reference Include="UnhollowerRuntimeLib">
-      <HintPath>$(BEPINEX_PATH)\core\UnhollowerRuntimeLib.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Unity.Postprocessing.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Unity.TextMeshPro.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\Steam\steamapps\common\Gunfire Reborn\BepInEx\core\UnhollowerBaseLib.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.AccessibilityModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.AccessibilityModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.AIModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.AndroidJNIModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.AndroidJNIModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.AIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AnimationModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.AnimationModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.AnimationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ARModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.ARModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AssetBundleModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.AssetBundleModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.AssetBundleModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AudioModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.AudioModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.AudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.BaselibModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.BaselibModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ClothModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.ClothModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.ClothModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterInputModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.ClusterInputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterRendererModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.ClusterRendererModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.CoreModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CrashReportingModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.CrashReportingModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.CrashReportingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.DirectorModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.DirectorModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.DirectorModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.FileSystemHttpModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.FileSystemHttpModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.GameCenterModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.GameCenterModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.GridModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.GridModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.GridModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.HotReloadModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.HotReloadModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.ImageConversionModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.ImageConversionModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.IMGUIModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.InputLegacyModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.InputModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.InputModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.InputModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.JSONSerializeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.LocalizationModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.LocalizationModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.Networking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.ParticleSystemModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.ParticleSystemModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.PerformanceReportingModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.PerformanceReportingModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.PerformanceReportingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Physics2DModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.Physics2DModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.Physics2DModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.PhysicsModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ProfilerModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.ProfilerModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.ScreenCaptureModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.ScreenCaptureModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.ScreenCaptureModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SharedInternalsModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.SharedInternalsModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.SharedInternalsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpriteMaskModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.SpriteMaskModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.SpriteMaskModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.SubsystemsModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.SubsystemsModule.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="UnityEngine.SpriteShapeModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.SpriteShapeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.StreamingModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.StreamingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.StyleSheetsModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.StyleSheetsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.SubstanceModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.SubstanceModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TerrainModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.TerrainModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.TerrainModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TerrainPhysicsModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.TerrainPhysicsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextCoreModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.TextCoreModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.TextCoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.TextRenderingModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TilemapModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.TilemapModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.TilemapModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Timeline">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TimelineModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.TimelineModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TLSModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.TLSModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UIElementsModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.UIElementsModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.UIElementsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UIModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.UIModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UmbraModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.UmbraModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UNETModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.UNETModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityAnalyticsModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.UnityAnalyticsModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityConnectModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.UnityConnectModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityTestProtocolModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.UnityWebRequestModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.UnityWebRequestModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestTextureModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestWWWModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.VehiclesModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.VehiclesModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.VFXModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.VFXModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.VFXModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.VideoModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.VideoModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.VideoModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.VRModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.VRModule.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.VRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.WindModule">
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.WindModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.XRModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.XRModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityFileDebug-ASM">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityFileDebug-ASM.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\GunfireRebornVRModBepInEx\Libs\UnityEngine.XRModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -322,6 +368,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "$(BEPINEX_PATH)\plugins" /E /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetPath)" "F:\Steam\steamapps\common\Gunfire Reborn\BepInEx\plugins" /E /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>

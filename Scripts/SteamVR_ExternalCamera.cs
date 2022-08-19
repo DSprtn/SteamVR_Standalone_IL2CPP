@@ -4,8 +4,6 @@
 //
 //=============================================================================
 
-using System;
-using System.IO;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Valve.VR;
@@ -14,9 +12,6 @@ namespace Valve.VR
 {
     public class SteamVR_ExternalCamera : MonoBehaviour
     {
-        public SteamVR_ExternalCamera(IntPtr value)
-       : base(value) { }
-
         private SteamVR_Action_Pose cameraPose = null;
         private SteamVR_Input_Sources cameraInputSource = SteamVR_Input_Sources.Camera;
 
@@ -35,11 +30,10 @@ namespace Valve.VR
             public bool disableStandardAssets;
         }
 
-
         public Config config;
         public string configPath;
 
-
+        
         public bool autoEnableDisableActionSet = true;
 
         public void ReadConfig()
@@ -124,6 +118,11 @@ namespace Valve.VR
             }
         }
 
+        System.IO.FileSystemWatcher watcher;
+#else
+	}
+#endif
+
         public void SetupPose(SteamVR_Action_Pose newCameraPose, SteamVR_Input_Sources newCameraSource)
         {
             cameraPose = newCameraPose;
@@ -142,15 +141,11 @@ namespace Valve.VR
             trackedObject.SetDeviceIndex(deviceIndex);
         }
 
-        void OnChanged(object source, FileSystemEventArgs e)
+        void OnChanged(object source, System.IO.FileSystemEventArgs e)
         {
             ReadConfig();
         }
 
-        FileSystemWatcher watcher;
-#else
-	}
-#endif
         Camera cam;
         Transform target;
         GameObject clipQuad;
@@ -172,6 +167,10 @@ namespace Valve.VR
             else
             {
                 vrcam = steamVR_Camera.camera;
+
+                if (target == steamVR_Camera.head)
+                    return;
+                target = steamVR_Camera.head;
             }
 
 
@@ -213,7 +212,7 @@ namespace Valve.VR
             while (offset.childCount > 0)
                 DestroyImmediate(offset.GetChild(0).gameObject);
 
-
+            // Setup clipping quad (using camera clip causes problems with shadows).
             clipQuad = GameObject.CreatePrimitive(PrimitiveType.Quad);
             clipQuad.name = "ClipQuad";
             DestroyImmediate(clipQuad.GetComponent<MeshCollider>());
@@ -250,8 +249,8 @@ namespace Valve.VR
 
         public void RenderNear()
         {
-            var w = 2560 / 2;
-            var h = 1440 / 2;
+            var w = Screen.width / 2;
+            var h = Screen.height / 2;
 
             if (cam.targetTexture == null || cam.targetTexture.width != w || cam.targetTexture.height != h)
             {
@@ -333,8 +332,8 @@ namespace Valve.VR
             cam.farClipPlane = config.far;
             cam.Render();
 
-            var w = 2560 / 2;
-            var h = 1440 / 2;
+            var w = Screen.width / 2;
+            var h = Screen.height / 2;
             Graphics.DrawTexture(new Rect(0, h, w, h), cam.targetTexture, colorMat);
         }
 

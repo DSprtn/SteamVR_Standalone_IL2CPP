@@ -167,7 +167,7 @@ namespace Valve.VR
             }
         }
 
-        public class Event<T0, T1, T2> : UnityEvent<T0, T1, T2>
+        public class Event<T0, T1, T2>
         {
             public event System.Action<T0, T1, T2> OnEvent;
 

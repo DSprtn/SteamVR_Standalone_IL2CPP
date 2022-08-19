@@ -8,11 +8,14 @@ using UnityEngine;
 using System.Collections;
 using Valve.VR;
 using System.IO;
+using System;
 
 namespace Valve.VR
 {
     public class SteamVR_LoadLevel : MonoBehaviour
     {
+        public SteamVR_LoadLevel(IntPtr value) : base(value) { }
+
         private static SteamVR_LoadLevel _active = null;
         public static bool loading { get { return _active != null; } }
         public static float progress

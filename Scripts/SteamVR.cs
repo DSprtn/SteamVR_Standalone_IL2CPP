@@ -8,6 +8,7 @@ using UnityEngine;
 using Valve.VR;
 using System.IO;
 using System.Linq;
+using UnhollowerRuntimeLib;
 
 #if UNITY_2017_2_OR_NEWER
     using UnityEngine.XR;
@@ -665,10 +666,62 @@ namespace Valve.VR
             }
         }
 
-#endregion
+        #endregion
 
+        static bool classesRegistered = false;
+
+        /// <summary>
+        /// Inject types into il2cpp pre-emptively to prevent errors using this method
+        /// </summary>
+        public static void PreRegisterIL2CPPClasses()
+        {
+            if (classesRegistered)
+            {
+                return;
+            }
+            classesRegistered = true;
+            ClassInjector.RegisterTypeInIl2Cpp<MelonCoroutineCallbacks>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_ActivateActionSetOnLoad>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Behaviour>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Behaviour_Boolean>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Behaviour_Single>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Behaviour_Skeleton>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Behaviour_Vector2>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Behaviour_Vector3>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Behaviour_Pose>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Camera>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Ears>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_ExternalCamera>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Frustum>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Fade>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_IK>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_LoadLevel>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Menu>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Overlay>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_PlayArea>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_RenderModel>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Render>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Skeleton_Poser>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_SphericalProjection>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Skybox>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_TrackingReferenceManager>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_TrackedObject>();
+            ClassInjector.RegisterTypeInIl2Cpp<SteamVR_Behaviour_SkeletonCustom>();
+        }
+
+        static bool m_setup;
         private SteamVR()
         {
+            // Sometimes during game exit SteamVR will attempt to re-create itself, for some reason.
+            if (m_setup)
+            {
+                return;
+            }
+            m_setup = true;
+            PreRegisterIL2CPPClasses();
+
+            UnityHooks.Init();
+
             hmd = OpenVR.System;
             Debug.LogFormat("<b>[SteamVR]</b> Initialized. Connected to {0} : {1} : {2} :: {3}", hmd_TrackingSystemName, hmd_ModelNumber, hmd_SerialNumber, hmd_Type);
 

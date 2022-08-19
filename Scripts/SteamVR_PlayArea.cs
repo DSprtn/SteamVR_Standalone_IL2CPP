@@ -8,11 +8,14 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using System.Collections;
 using Valve.VR;
+using System;
 
 namespace Valve.VR
 {
     public class SteamVR_PlayArea : MonoBehaviour
     {
+        public SteamVR_PlayArea(IntPtr value) : base(value) { }
+
         public float borderThickness = 0.15f;
         public float wireframeHeight = 2.0f;
         public bool drawWireframeWhenSelectedOnly = false;

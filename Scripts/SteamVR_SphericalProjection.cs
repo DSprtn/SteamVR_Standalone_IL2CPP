@@ -4,6 +4,7 @@
 //
 //=============================================================================
 
+using System;
 using UnityEngine;
 
 namespace Valve.VR
@@ -11,6 +12,8 @@ namespace Valve.VR
     
     public class SteamVR_SphericalProjection : MonoBehaviour
     {
+        public SteamVR_SphericalProjection(IntPtr value) : base(value) { }
+
         static Material material;
 
         public void Set(Vector3 N,

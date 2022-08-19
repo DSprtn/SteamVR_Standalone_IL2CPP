@@ -17,6 +17,8 @@ namespace Valve.VR
     /// </summary>
     public class SteamVR_Behaviour_Boolean : MonoBehaviour
     {
+        public SteamVR_Behaviour_Boolean(IntPtr value) : base(value) { }
+
         public SteamVR_Action_Boolean booleanAction;
 
         public SteamVR_Input_Sources inputSource;

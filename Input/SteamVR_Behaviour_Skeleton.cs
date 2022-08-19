@@ -10,6 +10,8 @@ namespace Valve.VR
 {
     public class SteamVR_Behaviour_Skeleton : MonoBehaviour
     {
+        public SteamVR_Behaviour_Skeleton(IntPtr value) : base(value) { }
+
         /// <summary>The action this component will use to update the model. Must be a Skeleton type action.</summary>
         public SteamVR_Action_Skeleton skeletonAction;
 

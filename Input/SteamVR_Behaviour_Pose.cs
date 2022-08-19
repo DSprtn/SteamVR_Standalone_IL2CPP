@@ -14,6 +14,8 @@ namespace Valve.VR
     /// </summary>
     public class SteamVR_Behaviour_Pose : MonoBehaviour
     {
+        public SteamVR_Behaviour_Pose(IntPtr value) : base(value) { }
+
         public SteamVR_Action_Pose poseAction = SteamVR_Input.GetAction<SteamVR_Action_Pose>("Pose");
 
         public SteamVR_Input_Sources inputSource;
@@ -212,18 +214,18 @@ namespace Valve.VR
         }
 
         /// <summary>Returns the velocities of the pose at the time specified. Can predict in the future or return past values.</summary>
-        public bool GetVelocitiesAtTimeOffset(float secondsFromNow, out Vector3 velocity, out Vector3 angularVelocity)
-        {
-            return poseAction[inputSource].GetVelocitiesAtTimeOffset(secondsFromNow, out velocity, out angularVelocity);
-        }
+        //public bool GetVelocitiesAtTimeOffset(float secondsFromNow, out Vector3 velocity, out Vector3 angularVelocity)
+        //{
+        //    return poseAction[inputSource].GetVelocitiesAtTimeOffset(secondsFromNow, out velocity, out angularVelocity);
+        //}
 
         /// <summary>Uses previously recorded values to find the peak speed of the pose and returns the corresponding velocity and angular velocity</summary>
-        public void GetEstimatedPeakVelocities(out Vector3 velocity, out Vector3 angularVelocity)
-        {
-            int top = historyBuffer.GetTopVelocity(10, 1);
+        //public void GetEstimatedPeakVelocities(out Vector3 velocity, out Vector3 angularVelocity)
+        //{
+        //    int top = historyBuffer.GetTopVelocity(10, 1);
 
-            historyBuffer.GetAverageVelocities(out velocity, out angularVelocity, 2, top);
-        }
+        //    historyBuffer.GetAverageVelocities(out velocity, out angularVelocity, 2, top);
+        //}
 
         protected int lastFrameUpdated;
         protected void UpdateHistoryBuffer()

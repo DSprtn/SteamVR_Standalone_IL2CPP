@@ -4,6 +4,7 @@
 //
 //=============================================================================
 
+using System;
 using UnityEngine;
 using Valve.VR;
 
@@ -11,6 +12,8 @@ namespace Valve.VR
 {
     public class SteamVR_Skybox : MonoBehaviour
     {
+        public SteamVR_Skybox(IntPtr value) : base(value) { }
+
         // Note: Unity's Left and Right Skybox shader variables are switched.
         public Texture front, back, left, right, top, bottom;
 

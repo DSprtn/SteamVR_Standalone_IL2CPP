@@ -8,9 +8,10 @@ using UnityEngine;
 using System.Collections;
 using System.Reflection;
 using Valve.VR;
+using System;
 
 #if UNITY_2017_2_OR_NEWER
-    using UnityEngine.XR;
+using UnityEngine.XR;
 #else
 using XRSettings = UnityEngine.VR.VRSettings;
 using XRDevice = UnityEngine.VR.VRDevice;
@@ -20,7 +21,9 @@ namespace Valve.VR
 {
     public class SteamVR_Camera : MonoBehaviour
     {
-        
+        public SteamVR_Camera(IntPtr value) : base(value) { }
+
+
         private Transform _head;
         public Transform head { get { return _head; } }
         public Transform offset { get { return _head; } } // legacy

@@ -4,6 +4,7 @@
 //
 //=============================================================================
 
+using System;
 using UnityEngine;
 using Valve.VR;
 
@@ -11,6 +12,8 @@ namespace Valve.VR
 {
     public class SteamVR_Ears : MonoBehaviour
     {
+        public SteamVR_Ears(IntPtr value) : base(value) { }
+
         public SteamVR_Camera vrcam;
 
         bool usingSpeakers;

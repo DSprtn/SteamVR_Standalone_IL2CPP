@@ -16,6 +16,8 @@ namespace Valve.VR
 {
     public class SteamVR_Behaviour : MonoBehaviour
     {
+        public SteamVR_Behaviour(IntPtr value) : base(value) { }
+
         private const string openVRDeviceName = "OpenVR";
         public static bool forcingInitialization = false;
 
@@ -52,7 +54,7 @@ namespace Valve.VR
                 if (forceUnityVRToOpenVR)
                     forcingInitialization = true;
 
-                SteamVR_Render renderInstance = GameObject.FindObjectOfType<SteamVR_Render>();
+                SteamVR_Render renderInstance = FindObjectOfType<SteamVR_Render>();
                 if (renderInstance != null)
                     steamVRObject = renderInstance.gameObject;
 

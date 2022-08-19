@@ -1,5 +1,6 @@
 ﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 
+using System;
 using UnityEngine;
 using Valve.VR;
 
@@ -11,7 +12,8 @@ namespace Valve.VR
     /// </summary>
     public class SteamVR_Behaviour_SkeletonCustom : SteamVR_Behaviour_Skeleton
     {
-        
+        public SteamVR_Behaviour_SkeletonCustom(IntPtr value) : base(value) { }
+
         protected Transform _wrist;
 
         

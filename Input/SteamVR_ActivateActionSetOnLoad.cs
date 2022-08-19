@@ -2,6 +2,7 @@
 
 using UnityEngine;
 using System.Collections;
+using System;
 
 namespace Valve.VR
 {
@@ -10,6 +11,8 @@ namespace Valve.VR
     /// </summary>
     public class SteamVR_ActivateActionSetOnLoad : MonoBehaviour
     {
+        public SteamVR_ActivateActionSetOnLoad(IntPtr value) : base(value) { }
+
         public SteamVR_ActionSet actionSet = SteamVR_Input.GetActionSet("default");
 
         public SteamVR_Input_Sources forSources = SteamVR_Input_Sources.Any;

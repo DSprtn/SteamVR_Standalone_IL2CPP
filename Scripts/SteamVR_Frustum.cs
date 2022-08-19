@@ -4,6 +4,7 @@
 //
 //=============================================================================
 
+using System;
 using UnityEngine;
 using Valve.VR;
 
@@ -11,6 +12,8 @@ namespace Valve.VR
 {
     public class SteamVR_Frustum : MonoBehaviour
     {
+        public SteamVR_Frustum(IntPtr value) : base(value) { }
+
         public SteamVR_TrackedObject.EIndex index;
 
         public float fovLeft = 45, fovRight = 45, fovTop = 45, fovBottom = 45, nearZ = 0.5f, farZ = 2.5f;

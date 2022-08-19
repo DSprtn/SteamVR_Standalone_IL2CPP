@@ -7,12 +7,14 @@
 using UnityEngine;
 using System.Collections;
 using Valve.VR;
-
+using System;
 
 namespace Valve.VR
 {
     public class SteamVR_Render : MonoBehaviour
     {
+        public SteamVR_Render(IntPtr value) : base(value) { }
+
         public SteamVR_ExternalCamera externalCamera;
         public string externalCameraConfigPath = "externalcamera.cfg";
 

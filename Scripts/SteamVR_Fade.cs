@@ -19,6 +19,7 @@
 //
 //=============================================================================
 
+using System;
 using UnityEngine;
 using Valve.VR;
 
@@ -26,6 +27,8 @@ namespace Valve.VR
 {
     public class SteamVR_Fade : MonoBehaviour
     {
+        public SteamVR_Fade(IntPtr value) : base(value) { }
+
         private Color currentColor = new Color(0, 0, 0, 0); // default starting color: black and fully transparent
         private Color targetColor = new Color(0, 0, 0, 0);  // default target color: black and fully transparent
         private Color deltaColor = new Color(0, 0, 0, 0);   // the delta-color is basically the "speed / second" at which the current color should change

@@ -4,6 +4,7 @@
 //
 //=============================================================================
 
+using System;
 using UnityEngine;
 using Valve.VR;
 
@@ -11,6 +12,8 @@ namespace Valve.VR
 {
     public class SteamVR_Menu : MonoBehaviour
     {
+        public SteamVR_Menu(IntPtr value) : base(value) { }
+
         public Texture cursor, background, logo;
         public float logoHeight, menuOffset;
 
@@ -239,7 +242,7 @@ namespace Valve.VR
 
             // If an existing camera is rendering into the overlay texture, we need
             // to temporarily disable it to keep it from clearing the texture on us.
-            var cameras = Object.FindObjectsOfType<Camera>();
+            var cameras = FindObjectsOfType<Camera>();
             foreach (var cam in cameras)
             {
                 if (cam.enabled && cam.targetTexture == texture)

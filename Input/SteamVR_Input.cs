@@ -121,21 +121,7 @@ namespace Valve.VR
 
         private static void FindPreinitializeMethod()
         {
-            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            for (int assemblyIndex = 0; assemblyIndex < assemblies.Length; assemblyIndex++)
-            {
-                Assembly assembly = assemblies[assemblyIndex];
-                Type type = assembly.GetType(SteamVR_Input_Generator_Names.fullActionsClassName);
-                if (type != null)
-                {
-                    MethodInfo preinitMethodInfo = type.GetMethod(SteamVR_Input_Generator_Names.preinitializeMethodName);
-                    if (preinitMethodInfo != null)
-                    {
-                        preinitMethodInfo.Invoke(null, null);
-                        return;
-                    }
-                }
-            }
+            SteamVR_Actions.PreInitialize();
         }
 
         /// <summary>

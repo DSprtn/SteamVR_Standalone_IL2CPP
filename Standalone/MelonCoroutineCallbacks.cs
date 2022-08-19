@@ -6,8 +6,7 @@ namespace Valve.VR
     class MelonCoroutineCallbacks : MonoBehaviour
     {
 
-        public MelonCoroutineCallbacks(IntPtr value)
-: base(value) { }
+        public MelonCoroutineCallbacks(IntPtr value): base(value) { }
 
 
         void Start()

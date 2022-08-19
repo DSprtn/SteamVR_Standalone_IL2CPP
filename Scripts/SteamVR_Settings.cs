@@ -1,14 +1,10 @@
 ﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine.Serialization;
 
 namespace Valve.VR
 {
-    public class SteamVR_Settings : ScriptableObject
+    public class SteamVR_Settings
     {
         private static SteamVR_Settings _instance;
         public static SteamVR_Settings instance
@@ -88,11 +84,11 @@ namespace Valve.VR
         {
             if (_instance == null)
             {
-                _instance = Resources.Load<SteamVR_Settings>("SteamVR_Settings");
+                //_instance = Resources.Load<SteamVR_Settings>("SteamVR_Settings");
 
                 if (_instance == null)
                 {
-                    _instance = SteamVR_Settings.CreateInstance<SteamVR_Settings>();
+                    _instance = new SteamVR_Settings();
 
 #if UNITY_EDITOR
                     string localFolderPath = SteamVR.GetSteamVRResourcesFolderPath(true);

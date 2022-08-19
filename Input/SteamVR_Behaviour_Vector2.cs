@@ -15,6 +15,8 @@ namespace Valve.VR
     /// </summary>
     public class SteamVR_Behaviour_Vector2 : MonoBehaviour
     {
+        public SteamVR_Behaviour_Vector2(IntPtr value) : base(value) { }
+
         /// <summary>The vector2 action to get data from</summary>
         public SteamVR_Action_Vector2 vector2Action;
 

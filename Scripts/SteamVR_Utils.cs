@@ -9,6 +9,7 @@ using System.Collections;
 using System.Runtime.InteropServices;
 using Valve.VR;
 using System.IO;
+using Mathf = Valve.VR.Mathf;
 
 public static class SteamVR_Utils
 {

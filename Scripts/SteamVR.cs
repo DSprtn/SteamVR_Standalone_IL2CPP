@@ -11,7 +11,7 @@ using System.Linq;
 using UnhollowerRuntimeLib;
 
 #if UNITY_2017_2_OR_NEWER
-    using UnityEngine.XR;
+using UnityEngine.XR;
 #else
 using XRSettings = UnityEngine.VR.VRSettings;
 using XRDevice = UnityEngine.VR.VRDevice;
@@ -260,13 +260,13 @@ namespace Valve.VR
         static public bool[] connected = new bool[OpenVR.k_unMaxTrackedDeviceCount];
 
         // render values
-        public float sceneWidth { get; private set; }
-        public float sceneHeight { get; private set; }
-        public float aspect { get; private set; }
-        public float fieldOfView { get; private set; }
-        public Vector2 tanHalfFov { get; private set; }
-        public VRTextureBounds_t[] textureBounds { get; private set; }
-        public SteamVR_Utils.RigidTransform[] eyes { get; private set; }
+        public float sceneWidth;
+        public float sceneHeight;
+        public float aspect;
+        public float fieldOfView;
+        public Vector2 tanHalfFov;
+        public VRTextureBounds_t[] textureBounds;
+        public SteamVR_Utils.RigidTransform[] eyes;
         public ETextureType textureType;
 
         // hmd properties

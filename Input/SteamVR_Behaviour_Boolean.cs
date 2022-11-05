@@ -17,12 +17,9 @@ namespace Valve.VR
     /// </summary>
     public class SteamVR_Behaviour_Boolean : MonoBehaviour
     {
-
-        public SteamVR_Behaviour_Boolean(IntPtr value)
-: base(value) { }
+        public SteamVR_Behaviour_Boolean(IntPtr value) : base(value) { }
 
         public SteamVR_Action_Boolean booleanAction;
-
 
         public SteamVR_Input_Sources inputSource;
 
@@ -68,7 +65,7 @@ namespace Valve.VR
         {
             if (booleanAction == null)
             {
-                Debug.LogError("[SteamVR_Standalone] Boolean action not set.", this);
+                Debug.LogError("[SteamVR] Boolean action not set.", this);
                 return;
             }
 
@@ -168,7 +165,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-
+        /// Gets the localized name of the device that the action corresponds to.
         /// </summary>
         /// <param name="localizedParts">
         /// <list type="bullet">

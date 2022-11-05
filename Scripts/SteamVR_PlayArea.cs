@@ -9,21 +9,17 @@ using UnityEngine.Rendering;
 using System.Collections;
 using Valve.VR;
 using System;
-using SteamVR_Standalone_IL2CPP.Util;
 
 namespace Valve.VR
 {
-
     public class SteamVR_PlayArea : MonoBehaviour
     {
+        public SteamVR_PlayArea(IntPtr value) : base(value) { }
+
         public float borderThickness = 0.15f;
         public float wireframeHeight = 2.0f;
         public bool drawWireframeWhenSelectedOnly = false;
         public bool drawInGame = true;
-
-
-        public SteamVR_PlayArea(IntPtr value)
-: base(value) { }
 
         public enum Size
         {
@@ -36,6 +32,7 @@ namespace Valve.VR
         public Size size;
         public Color color = Color.cyan;
 
+        
         public Vector3[] vertices;
 
         public static bool GetBounds(Size size, ref HmdQuad_t pRect)
@@ -49,7 +46,7 @@ namespace Valve.VR
                 var chaperone = OpenVR.Chaperone;
                 bool success = (chaperone != null) && chaperone.GetPlayAreaRect(ref pRect);
                 if (!success)
-                    Debug.LogWarning("<b>[SteamVR_Standalone]</b> Failed to get Calibrated Play Area bounds!  Make sure you have tracking first, and that your space is calibrated.");
+                    Debug.LogWarning("<b>[SteamVR]</b> Failed to get Calibrated Play Area bounds!  Make sure you have tracking first, and that your space is calibrated.");
 
                 if (temporarySession)
                     SteamVR.ExitTemporarySession();
@@ -178,7 +175,75 @@ namespace Valve.VR
             renderer.lightProbeUsage = LightProbeUsage.Off;
         }
 
-        
+#if UNITY_EDITOR
+        Hashtable values;
+        void Update()
+        {
+            if (!Application.isPlaying)
+            {
+                var fields = GetType().GetFields(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
+
+                bool rebuild = false;
+
+                if (values == null || (borderThickness != 0.0f && GetComponent<MeshFilter>().sharedMesh == null))
+                {
+                    rebuild = true;
+                }
+                else
+                {
+                    foreach (var f in fields)
+                    {
+                        if (!values.Contains(f) || !f.GetValue(this).Equals(values[f]))
+                        {
+                            rebuild = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (rebuild)
+                {
+                    BuildMesh();
+
+                    values = new Hashtable();
+                    foreach (var f in fields)
+                        values[f] = f.GetValue(this);
+                }
+            }
+        }
+#endif
+
+        void OnDrawGizmos()
+        {
+            if (!drawWireframeWhenSelectedOnly)
+                DrawWireframe();
+        }
+
+        void OnDrawGizmosSelected()
+        {
+            if (drawWireframeWhenSelectedOnly)
+                DrawWireframe();
+        }
+
+        public void DrawWireframe()
+        {
+            if (vertices == null || vertices.Length == 0)
+                return;
+
+            var offset = transform.TransformVector(Vector3.up * wireframeHeight);
+            for (int i = 0; i < 4; i++)
+            {
+                int next = (i + 1) % 4;
+
+                var a = transform.TransformPoint(vertices[i]);
+                var b = a + offset;
+                var c = transform.TransformPoint(vertices[next]);
+                var d = c + offset;
+                Gizmos.DrawLine(a, b);
+                Gizmos.DrawLine(a, c);
+                Gizmos.DrawLine(b, d);
+            }
+        }
 
         public void OnEnable()
         {

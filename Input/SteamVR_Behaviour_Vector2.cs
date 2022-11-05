@@ -15,28 +15,26 @@ namespace Valve.VR
     /// </summary>
     public class SteamVR_Behaviour_Vector2 : MonoBehaviour
     {
-
-        public SteamVR_Behaviour_Vector2(IntPtr value)
-: base(value) { }
+        public SteamVR_Behaviour_Vector2(IntPtr value) : base(value) { }
 
         /// <summary>The vector2 action to get data from</summary>
         public SteamVR_Action_Vector2 vector2Action;
 
         /// <summary>The device this action applies to. Any if the action is not device specific.</summary>
-
+        
         public SteamVR_Input_Sources inputSource;
 
-        /// <summary>Unity event that fires whenever the action's value has changed since the last update.</summary>
+        ///// <summary>Unity event that fires whenever the action's value has changed since the last update.</summary>
+        
+        //public SteamVR_Behaviour_Vector2Event onChange;
 
-        public SteamVR_Behaviour_Vector2Event onChange;
+        ///// <summary>Unity event that fires whenever the action's value has been updated</summary>
+        
+        //public SteamVR_Behaviour_Vector2Event onUpdate;
 
-        /// <summary>Unity event that fires whenever the action's value has been updated</summary>
-
-        public SteamVR_Behaviour_Vector2Event onUpdate;
-
-        /// <summary>Unity event that fires whenever the action's value has been updated and is non-zero</summary>
-
-        public SteamVR_Behaviour_Vector2Event onAxis;
+        ///// <summary>Unity event that fires whenever the action's value has been updated and is non-zero</summary>
+        
+        //public SteamVR_Behaviour_Vector2Event onAxis;
 
         /// <summary>C# event that fires whenever the action's value has changed since the last update.</summary>
         public ChangeHandler onChangeEvent;
@@ -54,7 +52,7 @@ namespace Valve.VR
         {
             if (vector2Action == null)
             {
-                Debug.LogError("[SteamVR_Standalone] Vector2 action not set.", this);
+                Debug.LogError("[SteamVR] Vector2 action not set.", this);
                 return;
             }
 
@@ -85,10 +83,10 @@ namespace Valve.VR
 
         private void SteamVR_Behaviour_Vector2_OnUpdate(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 newAxis, Vector2 newDelta)
         {
-            if (onUpdate != null)
-            {
-                onUpdate.Invoke(this, fromSource, newAxis, newDelta);
-            }
+            //if (onUpdate != null)
+            //{
+            //    onUpdate.Invoke(this, fromSource, newAxis, newDelta);
+            //}
             if (onUpdateEvent != null)
             {
                 onUpdateEvent.Invoke(this, fromSource, newAxis, newDelta);
@@ -97,10 +95,10 @@ namespace Valve.VR
 
         private void SteamVR_Behaviour_Vector2_OnChange(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 newAxis, Vector2 newDelta)
         {
-            if (onChange != null)
-            {
-                onChange.Invoke(this, fromSource, newAxis, newDelta);
-            }
+            //if (onChange != null)
+            //{
+            //    onChange.Invoke(this, fromSource, newAxis, newDelta);
+            //}
             if (onChangeEvent != null)
             {
                 onChangeEvent.Invoke(this, fromSource, newAxis, newDelta);
@@ -109,10 +107,10 @@ namespace Valve.VR
 
         private void SteamVR_Behaviour_Vector2_OnAxis(SteamVR_Action_Vector2 fromAction, SteamVR_Input_Sources fromSource, Vector2 newAxis, Vector2 newDelta)
         {
-            if (onAxis != null)
-            {
-                onAxis.Invoke(this, fromSource, newAxis, newDelta);
-            }
+            //if (onAxis != null)
+            //{
+            //    onAxis.Invoke(this, fromSource, newAxis, newDelta);
+            //}
             if (onAxisEvent != null)
             {
                 onAxisEvent.Invoke(this, fromSource, newAxis, newDelta);
@@ -120,7 +118,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-
+        /// Gets the localized name of the device that the action corresponds to.
         /// </summary>
         /// <param name="localizedParts">
         /// <list type="bullet">

@@ -5,9 +5,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 using System.Linq;
-
-using System.IO;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace Valve.VR
 {
@@ -132,7 +131,7 @@ namespace Valve.VR
                 {
                     if (throwErrors)
                     {
-                        Debug.LogError("<b>[SteamVR_Standalone]</b> Could not bind binding file specified by the actions.json manifest: " + bindingPath);
+                        Debug.LogError("<b>[SteamVR]</b> Could not bind binding file specified by the actions.json manifest: " + bindingPath);
                     }
                 }
             }
@@ -165,11 +164,11 @@ namespace Valve.VR
 
                         RemoveAppKey(newFilePath);
 
-                        Debug.Log("<b>[SteamVR_Standalone]</b> Copied (overwrote) SteamVR_Standalone Input file at path: " + newFilePath);
+                        Debug.Log("<b>[SteamVR]</b> Copied (overwrote) SteamVR Input file at path: " + newFilePath);
                     }
                     else
                     {
-                        Debug.Log("<b>[SteamVR_Standalone]</b> Skipped writing existing file at path: " + newFilePath);
+                        Debug.Log("<b>[SteamVR]</b> Skipped writing existing file at path: " + newFilePath);
                     }
                 }
                 else
@@ -178,7 +177,7 @@ namespace Valve.VR
 
                     RemoveAppKey(newFilePath);
 
-                    Debug.Log("<b>[SteamVR_Standalone]</b> Copied SteamVR_Standalone Input file to folder: " + newFilePath);
+                    Debug.Log("<b>[SteamVR]</b> Copied SteamVR Input file to folder: " + newFilePath);
                 }
 
             }
@@ -222,7 +221,7 @@ namespace Valve.VR
             {
                 string jsonText = File.ReadAllText(path);
 
-                SteamVR_Input_ActionFile actionFile = JsonConvert.DeserializeObject<SteamVR_Input_ActionFile>(jsonText);
+                SteamVR_Input_ActionFile actionFile = Newtonsoft.Json.JsonConvert.DeserializeObject<SteamVR_Input_ActionFile>(jsonText);
                 actionFile.filePath = path;
                 actionFile.InitializeHelperLists();
 
@@ -563,7 +562,7 @@ namespace Valve.VR
             if (dictionary.ContainsKey(languageTagKeyName))
                 language = (string)dictionary[languageTagKeyName];
             else
-                Debug.Log("<b>[SteamVR_Standalone]</b> Input: Error in actions file, no language_tag in localization array item.");
+                Debug.Log("<b>[SteamVR]</b> Input: Error in actions file, no language_tag in localization array item.");
 
             foreach (KeyValuePair<string, string> item in dictionary)
             {
@@ -596,10 +595,10 @@ namespace Valve.VR
     public class SteamVR_Input_Unity_AssemblyFile_Definition
     {
         public string name = "SteamVR_Actions";
-        public string[] references = new string[] { "SteamVR_Standalone" };
+        public string[] references = new string[] { "SteamVR" };
         public string[] optionalUnityReferences = new string[0];
         public string[] includePlatforms = new string[0];
-        public string[] excludePlatforms = new string[0];
+        public string[] excludePlatforms = new string[] { "Android" };
         public bool allowUnsafeCode = false;
         public bool overrideReferences = false;
         public string[] precompiledReferences = new string[0];

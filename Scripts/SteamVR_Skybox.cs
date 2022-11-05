@@ -12,10 +12,7 @@ namespace Valve.VR
 {
     public class SteamVR_Skybox : MonoBehaviour
     {
-
-        public SteamVR_Skybox(IntPtr value)
-: base(value) { }
-
+        public SteamVR_Skybox(IntPtr value) : base(value) { }
 
         // Note: Unity's Left and Right Skybox shader variables are switched.
         public Texture front, back, left, right, top, bottom;
@@ -95,11 +92,11 @@ namespace Valve.VR
                 var error = compositor.SetSkyboxOverride(textures);
                 if (error != EVRCompositorError.None)
                 {
-                    Debug.LogError("<b>[SteamVR_Standalone]</b> Failed to set skybox override with error: " + error);
+                    Debug.LogError("<b>[SteamVR]</b> Failed to set skybox override with error: " + error);
                     if (error == EVRCompositorError.TextureIsOnWrongDevice)
-                        Debug.Log("<b>[SteamVR_Standalone]</b> Set your graphics driver to use the same video card as the headset is plugged into for Unity.");
+                        Debug.Log("<b>[SteamVR]</b> Set your graphics driver to use the same video card as the headset is plugged into for Unity.");
                     else if (error == EVRCompositorError.TextureUsesUnsupportedFormat)
-                        Debug.Log("<b>[SteamVR_Standalone]</b> Ensure skybox textures are not compressed and have no mipmaps.");
+                        Debug.Log("<b>[SteamVR]</b> Ensure skybox textures are not compressed and have no mipmaps.");
                 }
             }
         }

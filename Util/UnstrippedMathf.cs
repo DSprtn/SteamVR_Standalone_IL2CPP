@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteamVR_Standalone_IL2CPP.Util
+namespace Valve.VR
 {
-    public  static partial class Mathf
+    public static partial class Mathf
     {
         // Returns the sine of angle /f/ in radians.
         public static float Sin(float f) { return (float)Math.Sin(f); }
@@ -87,6 +87,12 @@ namespace SteamVR_Standalone_IL2CPP.Util
                     m = values[i];
             }
             return m;
+        }
+
+        public static float Max(float v1, float v2, float v3, float v4)
+        {
+            float[] floats = new float[4] { v1, v2, v3, v4 };
+            return Max(floats);
         }
 
         /// *listonly*
@@ -268,9 +274,9 @@ namespace SteamVR_Standalone_IL2CPP.Util
             return Abs(b - a) < Max(0.000001f * Max(Abs(a), Abs(b)), Epsilon * 8);
         }
 
-       
 
-       
+
+
 
         // Loops the value t, so that it is never larger than length and never smaller than 0.
         public static float Repeat(float t, float length)

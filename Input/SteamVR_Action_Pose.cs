@@ -12,8 +12,8 @@ namespace Valve.VR
     [Serializable]
     /// <summary>
     /// Pose actions represent a position, rotation, and velocities inside the tracked space.
-    /// SteamVR_Standalone keeps a log of past poses so you can retrieve old poses with GetPoseAtTimeOffset or GetVelocitiesAtTimeOffset.
-    /// You can also pass in times in the future to these methods for SteamVR_Standalone's best prediction of where the pose will be at that time.
+    /// SteamVR keeps a log of past poses so you can retrieve old poses with GetPoseAtTimeOffset or GetVelocitiesAtTimeOffset.
+    /// You can also pass in times in the future to these methods for SteamVR's best prediction of where the pose will be at that time.
     /// </summary>
     public class SteamVR_Action_Pose : SteamVR_Action_Pose_Base<SteamVR_Action_Pose_Source_Map<SteamVR_Action_Pose_Source>, SteamVR_Action_Pose_Source>
     {
@@ -151,7 +151,15 @@ namespace Valve.VR
         }
 
         /// <summary>
+        /// Removes all listeners, useful for dispose pattern
+        /// </summary>
+        public void RemoveAllListeners(SteamVR_Input_Sources input_Sources)
+        {
+            sourceMap[input_Sources].RemoveAllListeners();
+        }
 
+        /// <summary>
+        /// Sets all pose and skeleton actions to use the specified universe origin.
         /// </summary>
         public static void SetTrackingUniverseOrigin(ETrackingUniverseOrigin newOrigin)
         {
@@ -169,7 +177,7 @@ namespace Valve.VR
         where SourceElement : SteamVR_Action_Pose_Source, new()
     {
         /// <summary>
-
+        /// Sets all pose (and skeleton) actions to use the specified universe origin.
         /// </summary>
         protected static void SetUniverseOrigin(ETrackingUniverseOrigin newOrigin)
         {
@@ -239,7 +247,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// SteamVR_Standalone keeps a log of past poses so you can retrieve old poses or estimated poses in the future by passing in a secondsFromNow value that is negative or positive.
+        /// SteamVR keeps a log of past poses so you can retrieve old poses or estimated poses in the future by passing in a secondsFromNow value that is negative or positive.
         /// </summary>
         /// <param name="inputSource">The device you would like to get data from. Any if the action is not device specific.</param>
         /// <param name="secondsFromNow">The time offset in the future (estimated) or in the past (previously recorded) you want to get data from</param>
@@ -250,7 +258,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// SteamVR_Standalone keeps a log of past poses so you can retrieve old poses or estimated poses in the future by passing in a secondsFromNow value that is negative or positive.
+        /// SteamVR keeps a log of past poses so you can retrieve old poses or estimated poses in the future by passing in a secondsFromNow value that is negative or positive.
         /// </summary>
         /// <param name="inputSource">The device you would like to get data from. Any if the action is not device specific.</param>
         /// <param name="secondsFromNow">The time offset in the future (estimated) or in the past (previously recorded) you want to get data from</param>
@@ -378,7 +386,7 @@ namespace Valve.VR
         where Source : SteamVR_Action_Pose_Source, new()
     {
         /// <summary>
-
+        /// Sets all pose (and skeleton) actions to use the specified universe origin without going through the sourcemap indexer
         /// </summary>
         public void SetTrackingUniverseOrigin(ETrackingUniverseOrigin newOrigin)
         {
@@ -518,7 +526,7 @@ namespace Valve.VR
         protected SteamVR_Action_Pose poseAction;
 
         /// <summary>
-        /// <strong>[Should not be called by user code]</strong> Sets up the internals of the action source before SteamVR_Standalone has been initialized.
+        /// <strong>[Should not be called by user code]</strong> Sets up the internals of the action source before SteamVR has been initialized.
         /// </summary>
         public override void Preinitialize(SteamVR_Action wrappingAction, SteamVR_Input_Sources forInputSource)
         {
@@ -528,7 +536,7 @@ namespace Valve.VR
 
         /// <summary>
         /// <strong>[Should not be called by user code]</strong>
-        /// Initializes the handle for the inputSource, the pose action data size, and any other related SteamVR_Standalone data.
+        /// Initializes the handle for the inputSource, the pose action data size, and any other related SteamVR data.
         /// </summary>
         public override void Initialize()
         {
@@ -536,6 +544,63 @@ namespace Valve.VR
 
             if (poseActionData_size == 0)
                 poseActionData_size = (uint)Marshal.SizeOf(typeof(InputPoseActionData_t));
+        }
+
+        /// <summary>
+        /// Removes all listeners, useful for dispose pattern
+        /// </summary>
+        public virtual void RemoveAllListeners()
+        {
+
+            Delegate[] delegates;
+
+            if (onActiveChange != null)
+            {
+                delegates = onActiveChange.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onActiveChange -= (SteamVR_Action_Pose.ActiveChangeHandler)existingDelegate;
+            }
+
+            if (onChange != null)
+            {
+                delegates = onChange.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onChange -= (SteamVR_Action_Pose.ChangeHandler)existingDelegate;
+            }
+
+            if (onUpdate != null)
+            {
+                delegates = onUpdate.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onUpdate -= (SteamVR_Action_Pose.UpdateHandler)existingDelegate;
+            }
+
+            if (onTrackingChanged != null)
+            {
+                delegates = onTrackingChanged.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onTrackingChanged -= (SteamVR_Action_Pose.TrackingChangeHandler)existingDelegate;
+            }
+
+            if (onValidPoseChanged != null)
+            {
+                delegates = onValidPoseChanged.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onValidPoseChanged -= (SteamVR_Action_Pose.ValidPoseChangeHandler)existingDelegate;
+            }
+
+            if (onDeviceConnectedChanged != null)
+            {
+                delegates = onDeviceConnectedChanged.GetInvocationList();
+                if (delegates != null)
+                    foreach (Delegate existingDelegate in delegates)
+                        onDeviceConnectedChanged -= (SteamVR_Action_Pose.DeviceConnectedChangeHandler)existingDelegate;
+            }
         }
 
         /// <summary><strong>[Should not be called by user code]</strong>
@@ -569,7 +634,7 @@ namespace Valve.VR
 
             if (err != EVRInputError.None)
             {
-                Debug.LogError("<b>[SteamVR_Standalone]</b> GetPoseActionData error (" + fullPath + "): " + err.ToString() + " Handle: " + handle.ToString() + ". Input source: " + inputSource.ToString());
+                Debug.LogError("<b>[SteamVR]</b> GetPoseActionData error (" + fullPath + "): " + err.ToString() + " Handle: " + handle.ToString() + ". Input source: " + inputSource.ToString());
             }
 
             if (active)
@@ -609,7 +674,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// SteamVR_Standalone keeps a log of past poses so you can retrieve old poses or estimated poses in the future by passing in a secondsFromNow value that is negative or positive.
+        /// SteamVR keeps a log of past poses so you can retrieve old poses or estimated poses in the future by passing in a secondsFromNow value that is negative or positive.
         /// </summary>
         /// <param name="secondsFromNow">The time offset in the future (estimated) or in the past (previously recorded) you want to get data from</param>
         /// <returns>true if we successfully returned a pose</returns>
@@ -618,7 +683,7 @@ namespace Valve.VR
             EVRInputError err = OpenVR.Input.GetPoseActionDataRelativeToNow(handle, universeOrigin, secondsFromNow, ref tempPoseActionData, poseActionData_size, inputSourceHandle);
             if (err != EVRInputError.None)
             {
-                Debug.LogError("<b>[SteamVR_Standalone]</b> GetPoseActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString()); //todo: this should be an error
+                //Debug.LogError("<b>[SteamVR]</b> GetPoseActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString()); //todo: this should be an error
 
                 velocityAtTime = Vector3.zero;
                 angularVelocityAtTime = Vector3.zero;
@@ -632,7 +697,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-        /// SteamVR_Standalone keeps a log of past poses so you can retrieve old poses or estimated poses in the future by passing in a secondsFromNow value that is negative or positive.
+        /// SteamVR keeps a log of past poses so you can retrieve old poses or estimated poses in the future by passing in a secondsFromNow value that is negative or positive.
         /// </summary>
         /// <param name="secondsFromNow">The time offset in the future (estimated) or in the past (previously recorded) you want to get data from</param>
         /// <returns>true if we successfully returned a pose</returns>
@@ -641,7 +706,7 @@ namespace Valve.VR
             EVRInputError err = OpenVR.Input.GetPoseActionDataRelativeToNow(handle, universeOrigin, secondsFromNow, ref tempPoseActionData, poseActionData_size, inputSourceHandle);
             if (err != EVRInputError.None)
             {
-                Debug.LogError("<b>[SteamVR_Standalone]</b> GetPoseActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString()); //todo: this should be an error
+                //Debug.LogError("<b>[SteamVR]</b> GetPoseActionData error (" + fullPath + "): " + err.ToString() + " handle: " + handle.ToString()); //todo: this should be an error
 
                 velocityAtTime = Vector3.zero;
                 angularVelocityAtTime = Vector3.zero;

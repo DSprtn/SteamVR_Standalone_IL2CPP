@@ -4,18 +4,15 @@
 //
 //=============================================================================
 
-using SteamVR_Standalone_IL2CPP.Util;
 using System;
 using UnityEngine;
-using Mathf = SteamVR_Standalone_IL2CPP.Util.Mathf;
 
 namespace Valve.VR
 {
+    
     public class SteamVR_SphericalProjection : MonoBehaviour
     {
-
-        public SteamVR_SphericalProjection(IntPtr value)
-: base(value) { }
+        public SteamVR_SphericalProjection(IntPtr value) : base(value) { }
 
         static Material material;
 
@@ -27,7 +24,7 @@ namespace Valve.VR
             if (material == null)
                 material = new Material(Shader.Find("Custom/SteamVR_SphericalProjection"));
 
-            material.SetVector("_N", new Vector4(N.x, N.y, N.z));
+            material.SetVector("_N", new Vector4(N.x, N.y, N.z, 0));
             material.SetFloat("_Phi0", phi0 * Mathf.Deg2Rad);
             material.SetFloat("_Phi1", phi1 * Mathf.Deg2Rad);
             material.SetFloat("_Theta0", theta0 * Mathf.Deg2Rad + Mathf.PI / 2);

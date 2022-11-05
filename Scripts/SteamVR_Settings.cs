@@ -1,10 +1,6 @@
 ﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine.Serialization;
 
 namespace Valve.VR
 {
@@ -21,8 +17,8 @@ namespace Valve.VR
             }
         }
 
-        public bool pauseGameWhenDashboardVisible = false;
-        public bool lockPhysicsUpdateRateToRenderFrequency = false;
+        public bool pauseGameWhenDashboardVisible = true;
+        public bool lockPhysicsUpdateRateToRenderFrequency = true;
         public ETrackingUniverseOrigin trackingSpace
         {
             get
@@ -37,12 +33,10 @@ namespace Valve.VR
             }
         }
 
-
+        
         private ETrackingUniverseOrigin trackingSpaceOrigin = ETrackingUniverseOrigin.TrackingUniverseStanding;
 
-
         public string actionsFilePath = "actions.json";
-
 
         public string steamVRInputPath = "SteamVR_Input";
 
@@ -51,11 +45,9 @@ namespace Valve.VR
 
         public bool activateFirstActionSetOnStart = true;
 
-        
         public string editorAppKey;
 
         public bool autoEnableVR = true;
-
 
         public bool legacyMixedRealityCamera = true;
 
@@ -97,10 +89,26 @@ namespace Valve.VR
                 if (_instance == null)
                 {
                     _instance = new SteamVR_Settings();
+
+#if UNITY_EDITOR
+                    string localFolderPath = SteamVR.GetSteamVRResourcesFolderPath(true);
+                    string assetPath = System.IO.Path.Combine(localFolderPath, "SteamVR_Settings.asset");
+
+                    UnityEditor.AssetDatabase.CreateAsset(_instance, assetPath);
+                    UnityEditor.AssetDatabase.SaveAssets();
+#endif
                 }
 
                 SetDefaultsIfNeeded();
             }
+        }
+
+        public static void Save()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorUtility.SetDirty(instance);
+            UnityEditor.AssetDatabase.SaveAssets();
+#endif
         }
 
         private const string defaultSettingsAssetName = "SteamVR_Settings";
@@ -110,15 +118,49 @@ namespace Valve.VR
             if (string.IsNullOrEmpty(_instance.editorAppKey))
             {
                 _instance.editorAppKey = SteamVR.GenerateAppKey();
-                Debug.Log("<b>[SteamVR_Standalone Setup]</b> Generated you an editor app key of: " + _instance.editorAppKey + ". This lets the editor tell SteamVR_Standalone what project this is. Has no effect on builds. This can be changed in Assets/SteamVR_Standalone/Resources/SteamVR_Settings");
-
+                Debug.Log("<b>[SteamVR Setup]</b> Generated you an editor app key of: " + _instance.editorAppKey + ". This lets the editor tell SteamVR what project this is. Has no effect on builds. This can be changed in Assets/SteamVR/Resources/SteamVR_Settings");
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(_instance);
+                UnityEditor.AssetDatabase.SaveAssets();
+#endif
             }
 
+#if UNITY_EDITOR
+            if (_instance.previewHandLeft == null)
+                _instance.previewHandLeft = FindDefaultPreviewHand(previewLeftDefaultAssetName);
 
+            if (_instance.previewHandRight == null)
+                _instance.previewHandRight = FindDefaultPreviewHand(previewRightDefaultAssetName);
+#endif
+
+#if OPENVR_XR_API
+            Unity.XR.OpenVR.OpenVRSettings settings = Unity.XR.OpenVR.OpenVRSettings.GetSettings();
+            settings.ActionManifestFileRelativeFilePath = SteamVR_Input.GetActionsFilePath();
+
+#if UNITY_EDITOR
+            settings.EditorAppKey = _instance.editorAppKey;
+#endif
+#endif
         }
 
         private static GameObject FindDefaultPreviewHand(string assetName)
         {
+#if UNITY_EDITOR
+            string[] defaultPaths = UnityEditor.AssetDatabase.FindAssets(string.Format("t:Prefab {0}", assetName));
+            if (defaultPaths != null && defaultPaths.Length > 0)
+            {
+                string defaultGUID = defaultPaths[0];
+                string defaultPath = UnityEditor.AssetDatabase.GUIDToAssetPath(defaultGUID);
+                GameObject defaultAsset = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(defaultPath);
+
+                if (defaultAsset == null)
+                    Debug.LogError("[SteamVR] Could not load default hand preview prefab: " + assetName + ". Found path: " + defaultPath);
+
+                return defaultAsset;
+            }
+            //else //todo: this will generally fail on the first try but will try again before its an issue.
+                //Debug.LogError("[SteamVR] Could not load default hand preview prefab: " + assetName);
+#endif
 
             return null;
 

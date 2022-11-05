@@ -1,22 +1,9 @@
 # SteamVR_Standalone_IL2CPP
-A modified SteamVR plugin that can be injected into Non-VR enabled Unity projects for VR rendering and VR input/interaction. Modified for IL2CPP. Specifically tailored for GTFO. Some adjustments required! 
+A modified SteamVR plugin that can be injected into Non-VR enabled Unity projects for VR rendering and VR input/interaction. 
 
-## How to use:
+Fork from [DSprtn/SteamVR_Standalone_IL2CPP](https://github.com/DSprtn/SteamVR_Standalone_IL2CPP) 
 
-#### CONFIGURATION 
-
-Set BEPINEX_PATH as a env variable to point to the bepinex folder of the game you're trying to mod. (i.e. ...\SteamApps\$GAME$\Bepinex), this will grab most references. Newtonsoft should be pulled automatically.
-
-You need to replace the memory offset in the SteamVR/ExternalPluginFunctionExtractor class with the memory offset of FindAndLoadUnityPlugin 
-from UnityPlayer.DLL (in your game install folder) for the exact Unity version your game is using.
-
-var loadLibraryAddress = module.BaseAddress + >>> 0x786D00 <<<
-
-I recommend using Ghidra or IDA to get the mem address.
-
-PDB files for the il2cpp UnityPlayer ship with the Unity editor and can be found under 
-Editor\Data\PlaybackEngines\windowsstandalonesupport\Variations\win64_nondevelopment_il2cpp
-You need to have Il2CPP support enabled in the given Unity install for them to appear.
+Modified for IL2CPP. Specifically tailored for Gunfire Reborn. 
 
 #### INITIALIZATION
 

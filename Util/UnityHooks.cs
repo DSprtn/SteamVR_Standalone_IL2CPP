@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace SteamVR_Standalone_IL2CPP.Util
+namespace Valve.VR
 {
     /// <summary>
     /// Hook into BeforeRenderHelper in your plugin to make these events work!

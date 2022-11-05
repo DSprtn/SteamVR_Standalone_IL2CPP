@@ -13,19 +13,15 @@ namespace Valve.VR
 {
     public class SteamVR_Overlay : MonoBehaviour
     {
-
-        public SteamVR_Overlay(IntPtr value)
-       : base(value) { }
-
+        public SteamVR_Overlay(IntPtr value) : base(value) { }
 
         public Texture texture;
 
-
+        
         public float scale = 3.0f;
 
-
+        
         public float distance = 1.25f;
-
 
         public float alpha = 1.0f;
 
@@ -48,7 +44,7 @@ namespace Valve.VR
                 var error = overlay.CreateOverlay(key, gameObject.name, ref handle);
                 if (error != EVROverlayError.None)
                 {
-                    Debug.Log("<b>[SteamVR_Standalone]</b> " + overlay.GetOverlayErrorNameFromEnum(error));
+                    Debug.Log("<b>[SteamVR]</b> " + overlay.GetOverlayErrorNameFromEnum(error));
                     enabled = false;
                     return;
                 }
@@ -131,48 +127,48 @@ namespace Valve.VR
             }
         }
 
-        public bool PollNextEvent(ref VREvent_t pEvent)
-        {
-            var overlay = OpenVR.Overlay;
-            if (overlay == null)
-                return false;
+        //public bool PollNextEvent(ref VREvent_t pEvent)
+        //{
+        //    var overlay = OpenVR.Overlay;
+        //    if (overlay == null)
+        //        return false;
 
-            var size = (uint)System.Runtime.InteropServices.Marshal.SizeOf(typeof(Valve.VR.VREvent_t));
-            return overlay.PollNextOverlayEvent(handle, ref pEvent, size);
-        }
+        //    var size = (uint)System.Runtime.InteropServices.Marshal.SizeOf(typeof(Valve.VR.VREvent_t));
+        //    return overlay.PollNextOverlayEvent(handle, ref pEvent, size);
+        //}
 
-        public struct IntersectionResults
-        {
-            public Vector3 point;
-            public Vector3 normal;
-            public Vector2 UVs;
-            public float distance;
-        }
+        //public struct IntersectionResults
+        //{
+        //    public Vector3 point;
+        //    public Vector3 normal;
+        //    public Vector2 UVs;
+        //    public float distance;
+        //}
 
-        public bool ComputeIntersection(Vector3 source, Vector3 direction, ref IntersectionResults results)
-        {
-            var overlay = OpenVR.Overlay;
-            if (overlay == null)
-                return false;
+        //public bool ComputeIntersection(Vector3 source, Vector3 direction, ref IntersectionResults results)
+        //{
+        //    var overlay = OpenVR.Overlay;
+        //    if (overlay == null)
+        //        return false;
 
-            var input = new VROverlayIntersectionParams_t();
-            input.eOrigin = SteamVR.settings.trackingSpace;
-            input.vSource.v0 = source.x;
-            input.vSource.v1 = source.y;
-            input.vSource.v2 = -source.z;
-            input.vDirection.v0 = direction.x;
-            input.vDirection.v1 = direction.y;
-            input.vDirection.v2 = -direction.z;
+        //    var input = new VROverlayIntersectionParams_t();
+        //    input.eOrigin = SteamVR.settings.trackingSpace;
+        //    input.vSource.v0 = source.x;
+        //    input.vSource.v1 = source.y;
+        //    input.vSource.v2 = -source.z;
+        //    input.vDirection.v0 = direction.x;
+        //    input.vDirection.v1 = direction.y;
+        //    input.vDirection.v2 = -direction.z;
 
-            var output = new VROverlayIntersectionResults_t();
-            if (!overlay.ComputeOverlayIntersection(handle, ref input, ref output))
-                return false;
+        //    var output = new VROverlayIntersectionResults_t();
+        //    if (!overlay.ComputeOverlayIntersection(handle, ref input, ref output))
+        //        return false;
 
-            results.point = new Vector3(output.vPoint.v0, output.vPoint.v1, -output.vPoint.v2);
-            results.normal = new Vector3(output.vNormal.v0, output.vNormal.v1, -output.vNormal.v2);
-            results.UVs = new Vector2(output.vUVs.v0, output.vUVs.v1);
-            results.distance = output.fDistance;
-            return true;
-        }
+        //    results.point = new Vector3(output.vPoint.v0, output.vPoint.v1, -output.vPoint.v2);
+        //    results.normal = new Vector3(output.vNormal.v0, output.vNormal.v1, -output.vNormal.v2);
+        //    results.UVs = new Vector2(output.vUVs.v0, output.vUVs.v1);
+        //    results.distance = output.fDistance;
+        //    return true;
+        //}
     }
 }

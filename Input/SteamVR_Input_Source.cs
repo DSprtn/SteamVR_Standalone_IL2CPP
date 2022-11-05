@@ -67,7 +67,7 @@ namespace Valve.VR
                 EVRInputError err = OpenVR.Input.GetInputSourceHandle(path, ref handle);
 
                 if (err != EVRInputError.None)
-                    Debug.LogError("<b>[SteamVR_Standalone]</b> GetInputSourceHandle (" + path + ") error: " + err.ToString());
+                    Debug.LogError("<b>[SteamVR]</b> GetInputSourceHandle (" + path + ") error: " + err.ToString());
 
                 if (enumNames[enumIndex] == SteamVR_Input_Sources.Any.ToString()) //todo: temporary hack
                 {

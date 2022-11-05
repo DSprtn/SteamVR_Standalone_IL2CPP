@@ -1,18 +1,12 @@
-﻿using SteamVR_Standalone_IL2CPP.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using UnityEngine;
 
-namespace SteamVR_Standalone_IL2CPP.Standalone
+namespace Valve.VR
 {
     class MelonCoroutineCallbacks : MonoBehaviour
     {
 
-        public MelonCoroutineCallbacks(IntPtr value)
-: base(value) { }
+        public MelonCoroutineCallbacks(IntPtr value): base(value) { }
 
 
         void Start()

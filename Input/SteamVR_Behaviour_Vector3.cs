@@ -12,24 +12,26 @@ namespace Valve.VR
 {
     public class SteamVR_Behaviour_Vector3 : MonoBehaviour
     {
-        public SteamVR_Behaviour_Vector3(IntPtr value)
-: base(value) { }
-
+        public SteamVR_Behaviour_Vector3(IntPtr value) : base(value) { }
 
         /// <summary>The vector3 action to get data from</summary>
         public SteamVR_Action_Vector3 vector3Action;
 
         /// <summary>The device this action applies to. Any if the action is not device specific.</summary>
+        
         public SteamVR_Input_Sources inputSource;
 
-        /// <summary>Unity event that fires whenever the action's value has changed since the last update.</summary>
-        public SteamVR_Behaviour_Vector3Event onChange;
+        ///// <summary>Unity event that fires whenever the action's value has changed since the last update.</summary>
+        
+        //public SteamVR_Behaviour_Vector3Event onChange;
 
-        /// <summary>Unity event that fires whenever the action's value has been updated</summary>
-        public SteamVR_Behaviour_Vector3Event onUpdate;
+        ///// <summary>Unity event that fires whenever the action's value has been updated</summary>
+        
+        //public SteamVR_Behaviour_Vector3Event onUpdate;
 
-        /// <summary>Unity event that fires whenever the action's value has been updated and is non-zero</summary>
-        public SteamVR_Behaviour_Vector3Event onAxis;
+        ///// <summary>Unity event that fires whenever the action's value has been updated and is non-zero</summary>
+        
+        //public SteamVR_Behaviour_Vector3Event onAxis;
 
         /// <summary>C# event that fires whenever the action's value has changed since the last update.</summary>
         public ChangeHandler onChangeEvent;
@@ -48,7 +50,7 @@ namespace Valve.VR
         {
             if (vector3Action == null)
             {
-                Debug.LogError("[SteamVR_Standalone] Vector3 action not set.", this);
+                Debug.LogError("[SteamVR] Vector3 action not set.", this);
                 return;
             }
 
@@ -79,10 +81,10 @@ namespace Valve.VR
 
         private void SteamVR_Behaviour_Vector3_OnUpdate(SteamVR_Action_Vector3 fromAction, SteamVR_Input_Sources fromSource, Vector3 newAxis, Vector3 newDelta)
         {
-            if (onUpdate != null)
-            {
-                onUpdate.Invoke(this, fromSource, newAxis, newDelta);
-            }
+            //if (onUpdate != null)
+            //{
+            //    onUpdate.Invoke(this, fromSource, newAxis, newDelta);
+            //}
             if (onUpdateEvent != null)
             {
                 onUpdateEvent.Invoke(this, fromSource, newAxis, newDelta);
@@ -91,10 +93,10 @@ namespace Valve.VR
 
         private void SteamVR_Behaviour_Vector3_OnChange(SteamVR_Action_Vector3 fromAction, SteamVR_Input_Sources fromSource, Vector3 newAxis, Vector3 newDelta)
         {
-            if (onChange != null)
-            {
-                onChange.Invoke(this, fromSource, newAxis, newDelta);
-            }
+            //if (onChange != null)
+            //{
+            //    onChange.Invoke(this, fromSource, newAxis, newDelta);
+            //}
             if (onChangeEvent != null)
             {
                 onChangeEvent.Invoke(this, fromSource, newAxis, newDelta);
@@ -103,10 +105,10 @@ namespace Valve.VR
 
         private void SteamVR_Behaviour_Vector3_OnAxis(SteamVR_Action_Vector3 fromAction, SteamVR_Input_Sources fromSource, Vector3 newAxis, Vector3 newDelta)
         {
-            if (onAxis != null)
-            {
-                onAxis.Invoke(this, fromSource, newAxis, newDelta);
-            }
+            //if (onAxis != null)
+            //{
+            //    onAxis.Invoke(this, fromSource, newAxis, newDelta);
+            //}
             if (onAxisEvent != null)
             {
                 onAxisEvent.Invoke(this, fromSource, newAxis, newDelta);
@@ -114,7 +116,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-
+        /// Gets the localized name of the device that the action corresponds to.
         /// </summary>
         /// <param name="localizedParts">
         /// <list type="bullet">

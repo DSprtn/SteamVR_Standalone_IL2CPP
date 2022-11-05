@@ -14,16 +14,11 @@ namespace Valve.VR
     /// </summary>
     public class SteamVR_Behaviour_Pose : MonoBehaviour
     {
-
-        public SteamVR_Behaviour_Pose(IntPtr value)
-: base(value) { }
-
+        public SteamVR_Behaviour_Pose(IntPtr value) : base(value) { }
 
         public SteamVR_Action_Pose poseAction = SteamVR_Input.GetAction<SteamVR_Action_Pose>("Pose");
 
-
         public SteamVR_Input_Sources inputSource;
-
 
         public Transform origin;
 
@@ -66,7 +61,6 @@ namespace Valve.VR
         public DeviceIndexChangedHandler onDeviceIndexChangedEvent;
 
 
-
         public bool broadcastDeviceChanges = true;
 
         protected int deviceIndex = -1;
@@ -74,13 +68,11 @@ namespace Valve.VR
         protected SteamVR_HistoryBuffer historyBuffer = new SteamVR_HistoryBuffer(30);
 
 
-        public Quaternion rotationOffset = Quaternion.identity;
-
         protected virtual void Start()
         {
             if (poseAction == null)
             {
-                Debug.LogError("<b>[SteamVR_Standalone]</b> No pose action set for this component", this);
+                Debug.LogError("<b>[SteamVR]</b> No pose action set for this component", this);
                 return;
             }
 
@@ -134,12 +126,12 @@ namespace Valve.VR
             if (origin != null)
             {
                 transform.position = origin.transform.TransformPoint(poseAction[inputSource].localPosition);
-                transform.rotation = origin.rotation * rotationOffset * poseAction[inputSource].localRotation;
+                transform.rotation = origin.rotation * poseAction[inputSource].localRotation;
             }
             else
             {
                 transform.localPosition = poseAction[inputSource].localPosition;
-                transform.localRotation = poseAction[inputSource].localRotation * rotationOffset;
+                transform.localRotation = poseAction[inputSource].localRotation;
             }
         }
 
@@ -181,7 +173,7 @@ namespace Valve.VR
 
                     if (broadcastDeviceChanges)
                     {
-                        foreach(SteamVR_RenderModel r in GetComponentsInChildren<SteamVR_RenderModel>())
+                        foreach (SteamVR_RenderModel r in GetComponentsInChildren<SteamVR_RenderModel>())
                         {
                             r.SetInputSource(inputSource);
                             r.SetDeviceIndex(deviceIndex);
@@ -222,18 +214,18 @@ namespace Valve.VR
         }
 
         /// <summary>Returns the velocities of the pose at the time specified. Can predict in the future or return past values.</summary>
-        public bool GetVelocitiesAtTimeOffset(float secondsFromNow, out Vector3 velocity, out Vector3 angularVelocity)
-        {
-            return poseAction[inputSource].GetVelocitiesAtTimeOffset(secondsFromNow, out velocity, out angularVelocity);
-        }
+        //public bool GetVelocitiesAtTimeOffset(float secondsFromNow, out Vector3 velocity, out Vector3 angularVelocity)
+        //{
+        //    return poseAction[inputSource].GetVelocitiesAtTimeOffset(secondsFromNow, out velocity, out angularVelocity);
+        //}
 
         /// <summary>Uses previously recorded values to find the peak speed of the pose and returns the corresponding velocity and angular velocity</summary>
-        public void GetEstimatedPeakVelocities(out Vector3 velocity, out Vector3 angularVelocity)
-        {
-            int top = historyBuffer.GetTopVelocity(10, 1);
+        //public void GetEstimatedPeakVelocities(out Vector3 velocity, out Vector3 angularVelocity)
+        //{
+        //    int top = historyBuffer.GetTopVelocity(10, 1);
 
-            historyBuffer.GetAverageVelocities(out velocity, out angularVelocity, 2, top);
-        }
+        //    historyBuffer.GetAverageVelocities(out velocity, out angularVelocity, 2, top);
+        //}
 
         protected int lastFrameUpdated;
         protected void UpdateHistoryBuffer()
@@ -247,7 +239,7 @@ namespace Valve.VR
         }
 
         /// <summary>
-
+        /// Gets the localized name of the device that the action corresponds to.
         /// </summary>
         /// <param name="localizedParts">
         /// <list type="bullet">

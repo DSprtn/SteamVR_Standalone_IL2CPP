@@ -65,139 +65,187 @@ namespace Valve.VR
             }
         }
         
-        public virtual SteamVR_Action_Vector2 Move
+        public virtual SteamVR_Action_Vector2 LS_Move
         {
             get
             {
-                return SteamVR_Actions.gameplay_Move;
+                return SteamVR_Actions.gameplay_LS_Move;
             }
         }
         
-        public virtual SteamVR_Action_Boolean Fire
+        public virtual SteamVR_Action_Single RT_Fire
         {
             get
             {
-                return SteamVR_Actions.gameplay_Fire;
+                return SteamVR_Actions.gameplay_RT_Fire;
             }
         }
         
-        public virtual SteamVR_Action_Boolean Jump
+        public virtual SteamVR_Action_Boolean A_Jump
         {
             get
             {
-                return SteamVR_Actions.gameplay_Jump;
+                return SteamVR_Actions.gameplay_A_Jump;
             }
         }
         
-        public virtual SteamVR_Action_Boolean Interact
+        public virtual SteamVR_Action_Boolean X_Interact_Reload
         {
             get
             {
-                return SteamVR_Actions.gameplay_Interact;
+                return SteamVR_Actions.gameplay_X_Interact_Reload;
             }
         }
         
-        public virtual SteamVR_Action_Boolean Reload
+        public virtual SteamVR_Action_Boolean Y_SwitchWeapons
         {
             get
             {
-                return SteamVR_Actions.gameplay_Reload;
+                return SteamVR_Actions.gameplay_Y_SwitchWeapons;
             }
         }
         
-        public virtual SteamVR_Action_Boolean SwitchWeapons
+        public virtual SteamVR_Action_Boolean LB_PrimarySkill
         {
             get
             {
-                return SteamVR_Actions.gameplay_SwitchWeapons;
+                return SteamVR_Actions.gameplay_LB_PrimarySkill;
             }
         }
         
-        public virtual SteamVR_Action_Boolean PrimarySkill
+        public virtual SteamVR_Action_Boolean RB_SecondarySkill
         {
             get
             {
-                return SteamVR_Actions.gameplay_PrimarySkill;
+                return SteamVR_Actions.gameplay_RB_SecondarySkill;
             }
         }
         
-        public virtual SteamVR_Action_Boolean SecondarySkill
+        public virtual SteamVR_Action_Boolean B_Dash_ReturnUI
         {
             get
             {
-                return SteamVR_Actions.gameplay_SecondarySkill;
+                return SteamVR_Actions.gameplay_B_Dash_ReturnUI;
             }
         }
         
-        public virtual SteamVR_Action_Boolean Dash
+        public virtual SteamVR_Action_Single LT_WeaponSkill
         {
             get
             {
-                return SteamVR_Actions.gameplay_Dash;
+                return SteamVR_Actions.gameplay_LT_WeaponSkill;
             }
         }
         
-        public virtual SteamVR_Action_Boolean WeaponSkill
+        public virtual SteamVR_Action_Boolean DPadL_InterruptCharging
         {
             get
             {
-                return SteamVR_Actions.gameplay_WeaponSkill;
+                return SteamVR_Actions.gameplay_DPadL_InterruptCharging;
             }
         }
         
-        public virtual SteamVR_Action_Boolean InterruptCharging
+        public virtual SteamVR_Action_Boolean DPadD_SwitchFireMode
         {
             get
             {
-                return SteamVR_Actions.gameplay_InterruptCharging;
+                return SteamVR_Actions.gameplay_DPadD_SwitchFireMode;
             }
         }
         
-        public virtual SteamVR_Action_Boolean DualWielding
+        public virtual SteamVR_Action_Boolean DPadR_TeamInformation
         {
             get
             {
-                return SteamVR_Actions.gameplay_DualWielding;
+                return SteamVR_Actions.gameplay_DPadR_TeamInformation;
             }
         }
         
-        public virtual SteamVR_Action_Boolean SwitchFireMode
+        public virtual SteamVR_Action_Boolean DPadU_Ping
         {
             get
             {
-                return SteamVR_Actions.gameplay_SwitchFireMode;
+                return SteamVR_Actions.gameplay_DPadU_Ping;
             }
         }
         
-        public virtual SteamVR_Action_Boolean TeamInformation
+        public virtual SteamVR_Action_Vector2 RS_Rotate
         {
             get
             {
-                return SteamVR_Actions.gameplay_TeamInformation;
+                return SteamVR_Actions.gameplay_RS_Rotate;
             }
         }
         
-        public virtual SteamVR_Action_Boolean Ping
+        public virtual SteamVR_Action_Boolean R3_Speak
         {
             get
             {
-                return SteamVR_Actions.gameplay_Ping;
+                return SteamVR_Actions.gameplay_R3_Speak;
             }
         }
         
-        public virtual SteamVR_Action_Vector2 Rotate
+        public virtual SteamVR_Action_Boolean Back_ToggleBattleMenu
         {
             get
             {
-                return SteamVR_Actions.gameplay_Rotate;
+                return SteamVR_Actions.gameplay_Back_ToggleBattleMenu;
             }
         }
         
-        public virtual SteamVR_Action_Vibration Haptic
+        public virtual SteamVR_Action_Boolean Start_ToggleBackpack
         {
             get
             {
-                return SteamVR_Actions.gameplay_Haptic;
+                return SteamVR_Actions.gameplay_Start_ToggleBackpack;
+            }
+        }
+        
+        public virtual SteamVR_Action_Vector2 Scroll
+        {
+            get
+            {
+                return SteamVR_Actions.gameplay_Scroll;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean InteractUI
+        {
+            get
+            {
+                return SteamVR_Actions.gameplay_InteractUI;
+            }
+        }
+        
+        public virtual SteamVR_Action_Single LT_DualWieldFire
+        {
+            get
+            {
+                return SteamVR_Actions.gameplay_LT_DualWieldFire;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean RB_DualWield2ndSkill
+        {
+            get
+            {
+                return SteamVR_Actions.gameplay_RB_DualWield2ndSkill;
+            }
+        }
+        
+        public virtual SteamVR_Action_Vibration HapticLeft
+        {
+            get
+            {
+                return SteamVR_Actions.gameplay_HapticLeft;
+            }
+        }
+        
+        public virtual SteamVR_Action_Vibration HapticRight
+        {
+            get
+            {
+                return SteamVR_Actions.gameplay_HapticRight;
             }
         }
     }

@@ -32,7 +32,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Actions\ActionSetClasses\SteamVR_Input_ActionSet_Gameplay.cs" />
-    <Compile Include="Actions\ActionSetClasses\SteamVR_Input_ActionSet_UI.cs" />
     <Compile Include="Actions\SteamVR_Input_Actions.cs" />
     <Compile Include="Actions\SteamVR_Input_ActionSets.cs" />
     <Compile Include="Actions\SteamVR_Input_Initialization.cs" />

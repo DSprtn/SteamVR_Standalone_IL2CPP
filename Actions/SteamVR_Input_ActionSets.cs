@@ -19,8 +19,6 @@ namespace Valve.VR
         
         private static SteamVR_Input_ActionSet_Gameplay p_Gameplay;
         
-        private static SteamVR_Input_ActionSet_UI p_UI;
-        
         public static SteamVR_Input_ActionSet_Gameplay Gameplay
         {
             get
@@ -29,21 +27,11 @@ namespace Valve.VR
             }
         }
         
-        public static SteamVR_Input_ActionSet_UI UI
-        {
-            get
-            {
-                return SteamVR_Actions.p_UI.GetCopy<SteamVR_Input_ActionSet_UI>();
-            }
-        }
-        
         private static void StartPreInitActionSets()
         {
             SteamVR_Actions.p_Gameplay = ((SteamVR_Input_ActionSet_Gameplay)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_Gameplay>("/actions/Gameplay")));
-            SteamVR_Actions.p_UI = ((SteamVR_Input_ActionSet_UI)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_UI>("/actions/UI")));
             Valve.VR.SteamVR_Input.actionSets = new Valve.VR.SteamVR_ActionSet[] {
-                    SteamVR_Actions.Gameplay,
-                    SteamVR_Actions.UI};
+                    SteamVR_Actions.Gameplay};
         }
     }
 }

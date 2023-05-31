@@ -226,8 +226,9 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "$(BEPINEX_PATH)\plugins" /E /Y</PostBuildEvent>
-  </PropertyGroup>
+  
+  <Target Name="PostBuild" BeforeTargets="PostBuildEvent">
+    <Exec Command='xcopy "$(TargetPath)" "$(BEPINEX_PATH)\plugins" /E /Y' />
+  </Target>
+  
 </Project>

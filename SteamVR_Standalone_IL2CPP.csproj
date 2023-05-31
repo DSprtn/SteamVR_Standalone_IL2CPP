@@ -1,324 +1,230 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CD430B64-0EA8-4084-912C-379979B05B7C}</ProjectGuid>
+    <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SteamVR_Standalone_IL2CPP</RootNamespace>
-    <AssemblyName>SteamVR_Standalone_IL2CPP</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
     <OutputPath>..\..\..\..\_VS_BUILDS\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Actions\SteamVR_Actions.cs" />
-    <Compile Include="Actions\SteamVR_Input_ActionSet_default.cs" />
-    <Compile Include="Input\BehaviourUnityEvents\SteamVR_Behaviour_BooleanEvent.cs" />
-    <Compile Include="Input\BehaviourUnityEvents\SteamVR_Behaviour_PoseEvent.cs" />
-    <Compile Include="Input\BehaviourUnityEvents\SteamVR_Behaviour_Pose_ConnectedChangedEvent.cs" />
-    <Compile Include="Input\BehaviourUnityEvents\SteamVR_Behaviour_Pose_DeviceIndexChangedEvent.cs" />
-    <Compile Include="Input\BehaviourUnityEvents\SteamVR_Behaviour_Pose_TrackingChangedEvent.cs" />
-    <Compile Include="Input\BehaviourUnityEvents\SteamVR_Behaviour_SingleEvent.cs" />
-    <Compile Include="Input\BehaviourUnityEvents\SteamVR_Behaviour_SkeletonEvent.cs" />
-    <Compile Include="Input\BehaviourUnityEvents\SteamVR_Behaviour_Skeleton_ConnectedChangedEvent.cs" />
-    <Compile Include="Input\BehaviourUnityEvents\SteamVR_Behaviour_Skeleton_TrackingChangedEvent.cs" />
-    <Compile Include="Input\BehaviourUnityEvents\SteamVR_Behaviour_Vector2Event.cs" />
-    <Compile Include="Input\BehaviourUnityEvents\SteamVR_Behaviour_Vector3Event.cs" />
-    <Compile Include="Input\SteamVR_Action.cs" />
-    <Compile Include="Input\SteamVR_ActionDirections.cs" />
-    <Compile Include="Input\SteamVR_ActionSet.cs" />
-    <Compile Include="Input\SteamVR_ActionSet_Manager.cs" />
-    <Compile Include="Input\SteamVR_Action_Boolean.cs" />
-    <Compile Include="Input\SteamVR_Action_In.cs" />
-    <Compile Include="Input\SteamVR_Action_Out.cs" />
-    <Compile Include="Input\SteamVR_Action_Pose.cs" />
-    <Compile Include="Input\SteamVR_Action_Single.cs" />
-    <Compile Include="Input\SteamVR_Action_Skeleton.cs" />
-    <Compile Include="Input\SteamVR_Action_Vector2.cs" />
-    <Compile Include="Input\SteamVR_Action_Vector3.cs" />
-    <Compile Include="Input\SteamVR_Action_Vibration.cs" />
-    <Compile Include="Input\SteamVR_ActivateActionSetOnLoad.cs" />
-    <Compile Include="Input\SteamVR_Behaviour_Boolean.cs" />
-    <Compile Include="Input\SteamVR_Behaviour_Pose.cs" />
-    <Compile Include="Input\SteamVR_Behaviour_Single.cs" />
-    <Compile Include="Input\SteamVR_Behaviour_Skeleton.cs" />
-    <Compile Include="Input\SteamVR_Behaviour_Vector2.cs" />
-    <Compile Include="Input\SteamVR_Behaviour_Vector3.cs" />
-    <Compile Include="Input\SteamVR_Input.cs" />
-    <Compile Include="Input\SteamVR_Input_ActionFile.cs" />
-    <Compile Include="Input\SteamVR_Input_ActionScopes.cs" />
-    <Compile Include="Input\SteamVR_Input_ActionSetUsages.cs" />
-    <Compile Include="Input\SteamVR_Input_BindingFile.cs" />
-    <Compile Include="Input\SteamVR_Input_Generator_Names.cs" />
-    <Compile Include="Input\SteamVR_Input_Source.cs" />
-    <Compile Include="Input\SteamVR_Input_Sources.cs" />
-    <Compile Include="Input\SteamVR_Skeleton_Pose.cs" />
-    <Compile Include="Input\SteamVR_Skeleton_Poser.cs" />
-    <Compile Include="Input\SteamVR_UpdateModes.cs" />
-    <Compile Include="Plugins\openvr_api.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scripts\SteamVR.cs" />
-    <Compile Include="Scripts\SteamVR_Behaviour.cs" />
-    <Compile Include="Scripts\SteamVR_Camera.cs" />
-    <Compile Include="Scripts\SteamVR_CameraFlip.cs" />
-    <Compile Include="Scripts\SteamVR_CameraMask.cs" />
-    <Compile Include="Scripts\SteamVR_Ears.cs" />
-    <Compile Include="Scripts\SteamVR_EnumEqualityComparer.cs" />
-    <Compile Include="Scripts\SteamVR_Events.cs" />
-    <Compile Include="Scripts\SteamVR_ExternalCamera.cs" />
-    <Compile Include="Scripts\SteamVR_ExternalCamera_LegacyManager.cs" />
-    <Compile Include="Scripts\SteamVR_Fade.cs" />
-    <Compile Include="Scripts\SteamVR_Frustum.cs" />
-    <Compile Include="Scripts\SteamVR_IK.cs" />
-    <Compile Include="Scripts\SteamVR_Overlay.cs" />
-    <Compile Include="Scripts\SteamVR_PlayArea.cs" />
-    <Compile Include="Scripts\SteamVR_Render.cs" />
-    <Compile Include="Scripts\SteamVR_RenderModel.cs" />
-    <Compile Include="Scripts\SteamVR_RingBuffer.cs" />
-    <Compile Include="Scripts\SteamVR_Settings.cs" />
-    <Compile Include="Scripts\SteamVR_Skybox.cs" />
-    <Compile Include="Scripts\SteamVR_SphericalProjection.cs" />
-    <Compile Include="Scripts\SteamVR_TrackedCamera.cs" />
-    <Compile Include="Scripts\SteamVR_TrackedObject.cs" />
-    <Compile Include="Scripts\SteamVR_TrackingReferenceManager.cs" />
-    <Compile Include="Scripts\SteamVR_Utils.cs" />
-    <Compile Include="Scripts\VelocityEstimator.cs" />
-    <Compile Include="Standalone\MelonCoroutineCallbacks.cs" />
-    <Compile Include="Standalone\SteamVR_GameView.cs" />
-    <Compile Include="Standalone\VRShaders.cs" />
-    <Compile Include="Util\Coroutines.cs" />
-    <Compile Include="Util\UnityHooks.cs" />
-    <Compile Include="Util\UnstrippedMathf.cs" />
-  </ItemGroup>
-  <ItemGroup>
+    <Reference Include="Il2CppInterop.Common">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(BEPINEX_PATH)\core\Il2CppInterop.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Il2CppInterop.Generator">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(BEPINEX_PATH)\core\Il2CppInterop.Generator.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Il2CppInterop.Runtime">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(BEPINEX_PATH)\core\Il2CppInterop.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Il2CppMono.Security">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppMono.Security.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\Il2CppMono.Security.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2Cppmscorlib">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2Cppmscorlib.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\Il2Cppmscorlib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\Il2CppSystem.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Configuration">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.Configuration.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\Il2CppSystem.Configuration.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Core">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.Core.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\Il2CppSystem.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Net.Http">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.Net.Http.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\Il2CppSystem.Net.Http.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Runtime.Serialization">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.Runtime.Serialization.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\Il2CppSystem.Runtime.Serialization.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Xml">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.Xml.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\Il2CppSystem.Xml.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.Xml.Linq">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Il2CppSystem.Xml.Linq.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\Il2CppSystem.Xml.Linq.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="UnhollowerBaseLib">
-      <HintPath>$(BEPINEX_PATH)\core\UnhollowerBaseLib.dll</HintPath>
-    </Reference>
-    <Reference Include="UnhollowerRuntimeLib">
-      <HintPath>$(BEPINEX_PATH)\core\UnhollowerRuntimeLib.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Unity.Postprocessing.Runtime.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\Unity.Postprocessing.Runtime.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\Unity.TextMeshPro.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\Unity.TextMeshPro.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.AIModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.AIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AndroidJNIModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.AndroidJNIModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.AndroidJNIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AnimationModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.AnimationModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.AnimationModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AssetBundleModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.AssetBundleModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.AssetBundleModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AudioModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.AudioModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.AudioModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.ClothModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.ClothModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.ClothModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CrashReportingModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.CrashReportingModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.CrashReportingModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.DirectorModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.DirectorModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.DirectorModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.GridModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.GridModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.GridModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.ImageConversionModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.ImageConversionModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.IMGUIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.InputLegacyModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.InputLegacyModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.InputModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.InputModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.InputModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.ParticleSystemModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.PerformanceReportingModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.PerformanceReportingModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.PerformanceReportingModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.Physics2DModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.Physics2DModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.Physics2DModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.PhysicsModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.PhysicsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.ScreenCaptureModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.ScreenCaptureModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.ScreenCaptureModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.SharedInternalsModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.SharedInternalsModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.SharedInternalsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.SpriteMaskModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.SpriteMaskModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.SpriteMaskModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.SubsystemsModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.SubsystemsModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.SubsystemsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TerrainModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.TerrainModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.TerrainModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TextCoreModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.TextCoreModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.TextCoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.TextRenderingModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TilemapModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.TilemapModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.TilemapModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.UI.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UIElementsModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.UIElementsModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.UIElementsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UIModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.UIModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.UIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityAnalyticsModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.UnityAnalyticsModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.UnityAnalyticsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.UnityWebRequestModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestWWWModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.VFXModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.VFXModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.VFXModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.VideoModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.VideoModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.VideoModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.VRModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.VRModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.VRModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.XRModule">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityEngine.XRModule.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityEngine.XRModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityFileDebug-ASM">
-      <HintPath>$(BEPINEX_PATH)\unhollowed\UnityFileDebug-ASM.dll</HintPath>
+      <HintPath>$(BEPINEX_PATH)\interop\UnityFileDebug-ASM.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.4.421302">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

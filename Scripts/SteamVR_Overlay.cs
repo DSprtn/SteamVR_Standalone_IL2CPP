@@ -8,6 +8,7 @@ using UnityEngine;
 using System.Collections;
 using Valve.VR;
 using System;
+using Il2CppInterop.Runtime.Attributes;
 
 namespace Valve.VR
 {

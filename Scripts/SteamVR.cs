@@ -903,7 +903,7 @@ namespace Valve.VR
                 ourGetRenderEventFunc = Marshal.GetDelegateForFunctionPointer<CallbackPointer>(GetProcAddress(hModule, "UnityHooks_GetRenderEventFunc"));
             }
 
-            [UnmanagedFunctionPointer(CallingConvention.FastCall)]
+            [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
             private delegate void FindAndLoadUnityPlugin(IntPtr name, out IntPtr loadedModule);
 
             [DllImport("kernel32", CharSet = CharSet.Ansi, ExactSpelling = true, SetLastError = true)]

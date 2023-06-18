@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Il2CppInterop.Runtime.InteropTypes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnhollowerBaseLib;
 using UnityEngine;
 
 namespace SteamVR_Standalone_IL2CPP.Util

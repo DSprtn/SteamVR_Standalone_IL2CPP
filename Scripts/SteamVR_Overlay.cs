@@ -8,6 +8,7 @@ using UnityEngine;
 using System.Collections;
 using Valve.VR;
 using System;
+using Il2CppInterop.Runtime.Attributes;
 
 namespace Valve.VR
 {
@@ -131,6 +132,7 @@ namespace Valve.VR
             }
         }
 
+        [HideFromIl2Cpp]
         public bool PollNextEvent(ref VREvent_t pEvent)
         {
             var overlay = OpenVR.Overlay;
@@ -149,6 +151,7 @@ namespace Valve.VR
             public float distance;
         }
 
+        [HideFromIl2Cpp]
         public bool ComputeIntersection(Vector3 source, Vector3 direction, ref IntersectionResults results)
         {
             var overlay = OpenVR.Overlay;

@@ -67,11 +67,27 @@ public class SteamVR_Camera : MonoBehaviour
 
     public static Resolution GetResolutionForAspect(int aspectW, int aspectH)
         {
-            Resolution hmdResolution = GetSceneResolution();
+            return GetResolutionForAspect(aspectW, aspectH, GetSceneResolution());
+        }
 
+        public static Resolution GetResolutionForAspect(int aspectW, int aspectH, int maxWidth)
+        {
+            // Some games choke on very high resolutions.
+            // Resolution for aspect uses width and adjusts height to make it 16:9, so just clamp the width.
+            Resolution sceneRes = GetSceneResolution();
+            if (sceneRes.width >= maxWidth)
+            {
+                sceneRes.width = maxWidth;
+            }
+
+            return GetResolutionForAspect(aspectW, aspectH, sceneRes);
+        }
+
+        public static Resolution GetResolutionForAspect(int aspectW, int aspectH, Resolution hmdResolution)
+        {
             // We calcuate an optimal 16:9 resolution to use with the HMD resolution because that's the best aspect for the UI rendering
             Resolution closestToAspect = hmdResolution;
-            closestToAspect.height = closestToAspect.width / aspectW * aspectH;
+            closestToAspect.height = closestToAspect.width * aspectH / aspectW; // Divide last because decimals
             closestToAspect.width += closestToAspect.width % 2;
             closestToAspect.height += closestToAspect.height % 2;
             return closestToAspect;

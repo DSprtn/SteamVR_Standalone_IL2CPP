@@ -16,6 +16,9 @@ namespace Valve.VR
 : base(value) { }
 
 
+        public static readonly EVREye FirstEye = EVREye.Eye_Left;
+        public static readonly EVREye SecondEye = EVREye.Eye_Right;
+
         public static EVREye eye { get; private set; }
 
         public static float unfocusedRenderResolution = 1f;
@@ -181,13 +184,16 @@ namespace Valve.VR
 
                 RenderExternalCamera();
 
-                if(preRenderBothEyesCallback != null)
+                // Any common tasks should be part of the first eye, so set it early
+                SteamVR_Render.eye = FirstEye;
+
+                if (preRenderBothEyesCallback != null)
                 {
                     preRenderBothEyesCallback.Invoke();
                 }
                 var vr = SteamVR.instance;
-                RenderEye(vr, EVREye.Eye_Left);
-                RenderEye(vr, EVREye.Eye_Right);
+                RenderEye(vr, FirstEye);
+                RenderEye(vr, SecondEye);
 
                 // Move cameras back to head position so they can be tracked reliably
                 foreach (var c in cameras)

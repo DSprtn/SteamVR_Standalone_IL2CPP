@@ -16,10 +16,14 @@ namespace Valve.VR
 : base(value) { }
 
 
+        public static readonly EVREye FirstEye = EVREye.Eye_Left;
+        public static readonly EVREye SecondEye = EVREye.Eye_Right;
+
         public static EVREye eye { get; private set; }
 
         public static float unfocusedRenderResolution = 1f;
 
+        private static bool renderHiddenAreaMask = true;
 
 
         public static SteamVR_Render instance
@@ -181,13 +185,16 @@ namespace Valve.VR
 
                 RenderExternalCamera();
 
-                if(preRenderBothEyesCallback != null)
+                // Any common tasks should be part of the first eye, so set it early
+                SteamVR_Render.eye = FirstEye;
+
+                if (preRenderBothEyesCallback != null)
                 {
                     preRenderBothEyesCallback.Invoke();
                 }
                 var vr = SteamVR.instance;
-                RenderEye(vr, EVREye.Eye_Left);
-                RenderEye(vr, EVREye.Eye_Right);
+                RenderEye(vr, FirstEye);
+                RenderEye(vr, SecondEye);
 
                 // Move cameras back to head position so they can be tracked reliably
                 foreach (var c in cameras)
@@ -563,6 +570,9 @@ namespace Valve.VR
             go.transform.parent = transform;
             cameraMask = go.AddComponent<SteamVR_CameraMask>();
 
+            // Value might have been set statically before Awake() was called
+            SetRenderHiddenAreaMask(renderHiddenAreaMask);
+
             if (externalCamera == null && System.IO.File.Exists(externalCameraConfigPath))
             {
                 var prefab = Resources.Load<GameObject>("SteamVR_ExternalCamera");
@@ -575,6 +585,14 @@ namespace Valve.VR
             }
         }
 
+        public static void SetRenderHiddenAreaMask(bool state)
+        {
+            renderHiddenAreaMask = state;
+            if ( instance != null )
+            {
+                instance.cameraMask.meshRenderer.enabled = renderHiddenAreaMask;
+            }
+        }
 
         public SteamVR_ExternalCamera externalCamera;
 

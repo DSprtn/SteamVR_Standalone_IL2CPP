@@ -73,6 +73,8 @@ namespace Valve.VR
 
         protected SteamVR_HistoryBuffer historyBuffer = new SteamVR_HistoryBuffer(30);
 
+        private bool motionPredictionTranslation = true;
+        private bool motionPredictionRotation = false;  // Rotation prediction tends to be noisy
 
         public Quaternion rotationOffset = Quaternion.identity;
 
@@ -131,16 +133,40 @@ namespace Valve.VR
         {
             CheckDeviceIndex();
 
+            Vector3 positionPredicted;
+            Quaternion rotationPredicted;
+            Vector3 velocityPredicted;
+            Vector3 angularVelocityPredicted;
+
+            // 0 is treated as some kind of default, and results in a preodicted pose
+            // that appears to take display time ( e.g. streaming latency ) into account.
+            poseAction[inputSource].GetPoseAtTimeOffset(0,
+                out positionPredicted,
+                out rotationPredicted,
+                out velocityPredicted,
+                out angularVelocityPredicted);
+
+            // Rotation prediction overshoots when moving fast, so best to only use translation.
+            Vector3 posePosition = motionPredictionTranslation ? positionPredicted : poseAction[inputSource].localPosition;
+            Quaternion poseRotation = motionPredictionRotation ? rotationPredicted : poseAction[inputSource].localRotation;
+
+            // Origin is pretty much always null
             if (origin != null)
             {
-                transform.position = origin.transform.TransformPoint(poseAction[inputSource].localPosition);
-                transform.rotation = origin.rotation * rotationOffset * poseAction[inputSource].localRotation;
+                transform.position = origin.transform.TransformPoint( posePosition );
+                transform.rotation = origin.rotation * rotationOffset * poseRotation;
             }
             else
             {
-                transform.localPosition = poseAction[inputSource].localPosition;
-                transform.localRotation = poseAction[inputSource].localRotation * rotationOffset;
+                transform.localPosition = posePosition;
+                transform.localRotation = poseRotation * rotationOffset;
             }
+        }
+
+        public void setPosePrediction(bool predictTranslation, bool predictRotation)
+        {
+            this.motionPredictionTranslation = predictTranslation;
+            this.motionPredictionRotation = predictRotation;
         }
 
         private void SteamVR_Behaviour_Pose_OnChange(SteamVR_Action_Pose fromAction, SteamVR_Input_Sources fromSource)

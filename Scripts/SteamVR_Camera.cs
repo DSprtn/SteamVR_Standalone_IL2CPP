@@ -118,13 +118,13 @@ public class SteamVR_Camera : MonoBehaviour
 
                
         int aa = QualitySettings.antiAliasing == 0 ? 1 : QualitySettings.antiAliasing;
-        var format = hdr ? RenderTextureFormat.ARGBHalf : RenderTextureFormat.ARGB32;
+       
         bool recreatedTex = false;
         if (_sceneTexture != null)
         {
             if (_sceneTexture.width != w || _sceneTexture.height != h)
             {
-                Debug.Log($"Recreating scene texture.. Old: {_sceneTexture.width}x{_sceneTexture.height } MSAA={_sceneTexture.antiAliasing} [{aa}] New: {w}x{h} MSAA={aa} [{format}]");
+                Debug.Log($"Recreating scene texture.. Old: {_sceneTexture.width}x{_sceneTexture.height } MSAA={_sceneTexture.antiAliasing} [{aa}] New: {w}x{h} MSAA={aa}]");
                 Destroy(_sceneTexture);
                 _sceneTexture = null;
                 recreatedTex = true;
@@ -133,7 +133,7 @@ public class SteamVR_Camera : MonoBehaviour
 
         if (_sceneTexture == null)
         {
-            _sceneTexture = new RenderTexture(w, h, 0, format, 0);
+            _sceneTexture = new RenderTexture(w, h, 0, UnityEngine.Experimental.Rendering.GraphicsFormat.R16G16B16A16_SFloat, 0);
             _sceneTexture.depth = 32;
             _sceneTexture.antiAliasing = aa;
 
